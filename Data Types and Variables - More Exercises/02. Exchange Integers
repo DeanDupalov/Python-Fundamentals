@@ -1,0 +1,22 @@
+a = int(input())
+b = int(input())
+temp_old_a = a
+a = b
+b = temp_old_a
+print(f"""
+Before:
+a = {temp_old_a}
+b = {a}
+After:
+a = {a}
+b = {temp_old_a}
+""")
+
+# print(f"""
+# After:
+# a = {a}
+# b = {b}
+# """)
+# After:
+# a = {a}
+# b = {b}
