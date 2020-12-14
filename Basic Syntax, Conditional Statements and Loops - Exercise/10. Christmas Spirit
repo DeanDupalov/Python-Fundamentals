@@ -1,0 +1,33 @@
+quantity = int(input())
+days_left = int(input())
+price_ornament_set = 2
+price_skirt = 5
+price_garlands = 3
+price_lights = 15
+
+total_cost = 0
+christmas_spirit = 0
+for day in range(1, days_left + 1):
+    if day % 11 == 0:
+        quantity += 2
+    if day % 2 == 0:
+        total_cost += quantity * price_ornament_set
+        christmas_spirit += 5
+    if day % 3 == 0:
+        total_cost += quantity * (price_skirt + price_garlands)
+        christmas_spirit += 13
+    if day % 5 == 0:
+        if day % 3 == 0:
+            christmas_spirit += 30
+        total_cost += quantity * price_lights
+        christmas_spirit += 17
+    if day % 10 == 0:
+        total_cost += price_lights + price_garlands + price_skirt
+        if day == days_left:
+            christmas_spirit -= 50
+        else:
+            christmas_spirit -= 20
+
+
+print(f"Total cost: {total_cost}")
+print(f"Total spirit: {christmas_spirit}")
