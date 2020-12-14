@@ -1,0 +1,5 @@
+start = int(input())
+stop = int(input())
+
+for ch in range(start, stop + 1):
+    print(chr(ch), end=' ')
