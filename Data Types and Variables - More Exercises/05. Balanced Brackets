@@ -1,0 +1,26 @@
+n_lines = int(input())
+closing = 0
+opening = 0
+empty = ''
+
+for i in range(n_lines):
+    symbol = input()
+    if symbol == '(':
+        if empty == symbol:
+            break
+        opening += 1
+        empty = symbol
+    elif symbol == ')':
+        if empty == symbol:
+            # print('UNBALANCED')
+            break
+        closing += 1
+        empty = symbol
+
+if closing == opening and closing > 0 and opening > 0:
+    print('BALANCED')
+else:
+    if closing % 2 == 0 and opening % 2 == 0:
+        print('BALANCED')
+    else:
+        print('UNBALANCED')
