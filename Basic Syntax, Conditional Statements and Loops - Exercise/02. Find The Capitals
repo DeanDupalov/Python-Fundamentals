@@ -1,0 +1,6 @@
+text = input()
+capital = []
+for i, char in enumerate(text):
+    if 'A' <= char <= 'Z':
+        capital.append(i)
+print(capital)
