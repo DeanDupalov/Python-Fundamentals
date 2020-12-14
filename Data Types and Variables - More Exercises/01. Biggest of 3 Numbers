@@ -1,0 +1,5 @@
+numbers = [int(input()), int(input()), int(input())]
+
+numbers.sort()
+
+print(numbers[-1])
