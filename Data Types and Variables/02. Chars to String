@@ -1,0 +1,10 @@
+def char_into_str():
+    char_one = input()
+    char_two = input()
+    char_three = input()
+
+    string_new = char_one + char_two + char_three
+    print(string_new)
+
+
+char_into_str()
