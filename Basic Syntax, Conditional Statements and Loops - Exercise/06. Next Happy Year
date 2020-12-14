@@ -1,0 +1,13 @@
+year_int = int(input()) + 1
+year = str(year_int)
+while True:
+
+    year_symbols = len(year)
+    unique_sym = len(set(year))
+    if year_symbols == unique_sym:
+        break
+    else:
+        year_int += 1
+        year = str(year_int)
+
+print(year)
