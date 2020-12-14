@@ -1,0 +1,10 @@
+n1 = int(input())
+n2 = int(input())
+n3 = int(input())
+n4 = int(input())
+
+result_one = n1 + n2
+result_two = result_one // n3
+result_three = result_two * n4
+
+print(result_three)
