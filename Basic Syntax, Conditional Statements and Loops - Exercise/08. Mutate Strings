@@ -1,0 +1,10 @@
+string_one = input()  # 'bubble gum'
+string_two = input()  # 'turtle hum'
+
+for i in range(len(string_one)):
+    if string_one[i] != string_two[i]:
+        for str_two_i in range(0, i + 1):
+            print(string_two[str_two_i], end='')
+        for str_one_i in range(i + 1, len(string_one)):
+            print(string_one[str_one_i], end='')
+        print()
