@@ -1,0 +1,45 @@
+fires_and_cell = input().split('#')
+water = int(input())
+# Type of Fire	Range
+# High	        81 - 125
+# Medium	    51 - 80
+# Low	        1 - 50
+effort = 0.0
+total_fire = 0
+list_cell = []
+for data in fires_and_cell:
+    tokens = data.split(' = ')
+    type_fire = tokens[0]
+    cell = int(tokens[1])
+
+    if water < cell:
+        continue
+    if type_fire == 'High':
+        if 81 <= cell <= 125:
+            water -= cell
+            effort += cell * 0.25
+            total_fire += cell
+            list_cell.append(cell)
+        else:
+            continue
+    elif type_fire == 'Medium':
+        if 51 <= cell < 81:
+            water -= cell
+            effort += cell * 0.25
+            total_fire += cell
+            list_cell.append(cell)
+        else:
+            continue
+    elif type_fire == 'Low':
+        if 1 <= cell < 51:
+            water -= cell
+            effort += cell * 0.25
+            total_fire += cell
+            list_cell.append(cell)
+        else:
+            continue
+print('Cells:')
+for j in range(len(list_cell)):
+    print(f' - {list_cell[j]}')
+print(f"Effort: {effort:.2f}")
+print(f"Total Fire: {total_fire}")
