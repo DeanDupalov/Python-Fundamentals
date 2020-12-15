@@ -1,0 +1,10 @@
+numbers_str = input().split()
+count_remove = int(input())
+numbers = []
+for num in numbers_str:
+    numbers.append(int(num))
+
+for c in range(count_remove):
+    numbers.remove(min(numbers))
+
+print(numbers)
