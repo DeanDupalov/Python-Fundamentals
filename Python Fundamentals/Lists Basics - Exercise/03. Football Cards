@@ -1,0 +1,24 @@
+team_A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+team_B = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+red_cards = input().split()  # A-1 A-5 A-10 B-2 A-10 A-7 A-3
+red_A = []
+red_B = []
+count_red_A = 0
+count_red_B = 0
+for red in red_cards:
+    if 'A' in red:
+        if red in red_A:
+            continue
+        else:
+            red_A.append(red)
+        count_red_A += 1
+    else:
+        if red in red_B:
+            continue
+        else:
+            red_B.append(red)
+        count_red_B += 1
+print(f"Team A - {len(team_A) - len(red_A)}; Team B - {len(team_B) - len(red_B)}")
+if len(red_A) >= 5 or len(red_B) >= 5:
+    print('Game was terminated')
