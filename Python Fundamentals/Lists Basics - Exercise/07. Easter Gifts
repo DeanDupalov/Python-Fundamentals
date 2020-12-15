@@ -1,0 +1,26 @@
+gifts = input().split()  # Eggs StuffedAnimal Cozonac Sweets EasterBunny Eggs Clothes
+command = input()
+while command != 'No Money':
+    tokens = command.split()
+    if "OutOfStock" in tokens:  # OutOfStock Eggs
+        gift = tokens[1]
+        for i in range(len(gifts)):
+            if gifts[i] == gift:
+                gifts[i] = 'None'
+    elif "Required" in tokens:
+        gift = tokens[1]
+        index = int(tokens[2])
+        for i in range(len(gifts)):
+            if 0 < index < len(gifts) and i == index:
+                gifts[i] = gift
+
+    elif "JustInCase" in tokens:
+        gift = tokens[1]
+        gifts[-1] = gift
+
+    command = input()
+
+list_print = []
+for i in range(len(gifts)):
+    if 'None' != gifts[i]:
+        print(gifts[i], end=' ')
