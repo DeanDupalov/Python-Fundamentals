@@ -1,0 +1,8 @@
+data = input()
+my_opposite_numbers = []
+my_numbers_str = data.split()
+for num in my_numbers_str:
+    my_opposite_numbers.append(-int(num))
+
+
+print(my_opposite_numbers)
