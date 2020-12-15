@@ -1,0 +1,14 @@
+list_cards = input().split()  # ['ace', 'two', 'three', 'four', 'five', 'six']
+shuffles = int(input())  # 0      1       2       0        1       2
+
+shuffle_list = []
+mid = len(list_cards) // 2
+
+for s in range(1, shuffles + 1):
+    for i in range(mid):
+        shuffle_list.append(list_cards[i])
+        shuffle_list.append(list_cards[mid + i])
+    list_cards = shuffle_list.copy()
+    shuffle_list = []
+
+print(list_cards)
