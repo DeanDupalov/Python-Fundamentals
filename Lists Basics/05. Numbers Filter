@@ -1,0 +1,35 @@
+def is_even(number):
+    return number % 2 == 0
+
+
+def is_odd(number):
+    return number % 2 != 0
+
+
+def is_negative(number):
+    return number < 0
+
+
+def is_positive(number):
+    return number >= 0
+
+
+n = int(input())
+numbers = []
+filer_numbers = []
+for _ in range(n):  # number = [int(input()) for _ in range(n_lines)]  list comprehension
+    numbers.append(int(input()))
+command = input()
+
+commands_map = { # dictionary
+    'even': is_even,
+    'odd': is_odd,
+    'negative': is_negative,
+    'positive': is_positive
+}
+filter_fn = commands_map[command] # функция която ще прави филтрирането покоманда
+
+for num in numbers:
+    if filter_fn(num):
+        filer_numbers.append(num)
+print(filer_numbers)
