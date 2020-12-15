@@ -1,0 +1,43 @@
+collection = input().split('|')
+budget = float(input())
+original_budget = budget
+prices = []
+profit = 0.0
+for data in collection:
+    items = data.split('->')
+    item = items[0]
+    item_buy_price = float(items[1])
+
+    if budget < item_buy_price:
+        continue
+    if item == 'Clothes':
+        if item_buy_price > 50.00:
+            continue
+        else:
+            budget -= item_buy_price
+            prices.append(item_buy_price)
+    elif item == 'Shoes':
+        if item_buy_price > 35.00:
+            continue
+        else:
+            budget -= item_buy_price
+            prices.append(item_buy_price)
+    elif item == 'Accessories':
+        if item_buy_price > 20.50:
+            continue
+        else:
+            budget -= item_buy_price
+            prices.append(item_buy_price)
+
+for price in prices:
+    price_plus_40 = price + (price * 0.40)
+    profit += price_plus_40
+    print(f'{price_plus_40:.2f}', end=' ')
+
+total_profit = (profit + budget) - original_budget
+print()
+print(f'Profit: {total_profit:.2f}')
+if budget + profit >= 150:
+    print('Hello, France!')
+else:
+    print('Time to go.')
