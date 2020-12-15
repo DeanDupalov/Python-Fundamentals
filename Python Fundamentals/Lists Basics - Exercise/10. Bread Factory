@@ -1,0 +1,40 @@
+import sys
+
+events = input().split('|')
+your_energy = 100
+your_coins = 100
+is_completed = True
+for data in events:
+    tokens = data.split('-')
+    command = tokens[0]
+    coins_energy = int(tokens[1])
+
+    if command == 'rest':
+        if your_energy + coins_energy > 100:
+            print('You gained 0 energy.')
+        else:
+            your_energy += coins_energy
+            print(f'You gained {coins_energy} energy.')
+        print(f"Current energy: {your_energy}.")
+    elif command == 'order':
+        if your_energy - 30 >= 0:
+            your_energy -= 30
+            your_coins += coins_energy
+            print(f"You earned {coins_energy} coins.")
+        else:
+            your_energy += 50
+            print("You had to rest!")
+            continue
+    else:
+        if your_coins - coins_energy > 0.0:
+            your_coins -= coins_energy
+            print(f"You bought {command}.")
+
+        else:
+            print(f"Closed! Cannot afford {command}.")
+            is_completed = False
+            break
+if is_completed:
+    print('Day completed!')
+    print(f'Coins: {your_coins}')
+    print(f'Energy: {your_energy}')
