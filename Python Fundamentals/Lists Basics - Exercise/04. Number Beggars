@@ -1,0 +1,12 @@
+data = input().split(', ')
+beggars = int(input())
+data_int = []  # 1, 2, 3, 4, 5
+list_sum = [0] * beggars  # 3
+beggar_sum = 0
+for num in data:
+    data_int.append(int(num))
+
+for i in range(len(data_int)):
+    index = i % beggars
+    list_sum[index] += data_int[i]
+print(list_sum)
