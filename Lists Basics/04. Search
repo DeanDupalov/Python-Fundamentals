@@ -1,0 +1,13 @@
+lines = int(input())
+word = input()
+
+data = []
+data_word = []
+for i in range(lines):
+    data.append(input())
+print(data)
+for the_word in data:
+    if word in the_word:
+        data_word.append(the_word)
+
+print(data_word)
