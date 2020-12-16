@@ -1,0 +1,35 @@
+# 'multiply', 'divide', 'add', 'subtract'
+def multiply(a, b):
+    return a * b
+
+
+def divide(a, b):
+    return a // b
+
+
+def add(a, b):
+    return a + b
+
+
+def subtract(a, b):
+    return a - b
+
+
+def select_operation(a, b, operation):
+    mapping = [
+        ['multiply', multiply],
+        ['divide', divide],
+        ['add', add],
+        ['subtract', subtract]
+    ]
+
+    for operation_name, fn in mapping:
+        if operation_name == operation:
+            return fn(a, b)
+
+
+operation_name = input()
+a = int(input())
+b = int(input())
+
+print(select_operation(a, b, operation_name))
