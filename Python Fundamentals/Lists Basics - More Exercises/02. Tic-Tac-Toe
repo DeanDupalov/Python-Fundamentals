@@ -1,0 +1,50 @@
+row1 = [int(i) for i in input().split(' ')]
+row2 = [int(i) for i in input().split(' ')]
+row3 = [int(i) for i in input().split(' ')]
+player1 = 1
+player2 = 2
+matrix = [
+    row1,
+    row2,
+    row3
+]
+is_draw = True
+for i in range(len(matrix)):
+    if matrix[0][0] == player1 and matrix[1][1] == player1 and matrix[2][2] == player1:
+        print('First player won')
+        is_draw = False
+        break
+    elif matrix[0][0] == player2 and matrix[1][1] == player2 and matrix[2][2] == player2:
+        print('Second player won')
+        is_draw = False
+        break
+
+    if matrix[0][2] == player1 and matrix[1][1] == player1 and matrix[2][0] == player1:
+        print('First player won')
+        is_draw = False
+        break
+    elif matrix[0][2] == player2 and matrix[1][1] == player2 and matrix[2][0] == player2:
+        print('Second player won')
+        is_draw = False
+        break
+
+    if matrix[i][0] == player1 and matrix[i][1] == player1 and matrix[i][2] == player1:
+        print('First player won')
+        is_draw = False
+        break
+    elif matrix[i][0] == player2 and matrix[i][1] == player2 and matrix[i][2] == player2:
+        print('Second player won')
+        is_draw = False
+        break
+
+    if matrix[0][i] == player1 and matrix[1][i] == player1 and matrix[2][i] == player1:
+        print('First player won')
+        is_draw = False
+        break
+    elif matrix[0][i] == player2 and matrix[1][i] == player2 and matrix[2][i] == player2:
+        print('Second player won')
+        is_draw = False
+        break
+
+if is_draw:
+    print('Draw!')
