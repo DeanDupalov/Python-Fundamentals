@@ -1,0 +1,7 @@
+def repeat(text, count):
+    return text * count
+
+
+data = input()
+n = int(input())
+print(repeat(data, n))
