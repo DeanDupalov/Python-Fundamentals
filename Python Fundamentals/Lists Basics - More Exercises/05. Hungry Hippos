@@ -1,0 +1,44 @@
+def is_valid(r, c, multi_list):
+    return 0 <= r < len(multi_list) and 0 <= c < len((multi_list[0]))
+
+
+def is_food(r, c, multi_list):
+    return multi_list[r][c] == 1
+
+
+def check_around(r, c, multi_list):
+    coordinates = []
+
+    if is_valid(r + 1, c, multi_list) and is_food(r + 1, c, multi_list):
+        coordinates.append((r + 1, c))
+    if is_valid(r - 1, c, multi_list) and is_food(r - 1, c, multi_list):
+        coordinates.append((r - 1, c))
+    if is_valid(r, c - 1, multi_list) and is_food(r, c - 1, multi_list):
+        coordinates.append((r, c - 1))
+    if is_valid(r, c + 1, multi_list) and is_food(r, c + 1, multi_list):
+        coordinates.append((r, c + 1))
+    return coordinates
+
+
+rows_count = int(input())
+matrix = [[int(x) for x in input().split()] for _ in range(rows_count)]
+
+blocks_count = 0
+
+for row in range(rows_count):
+    for col in range(len(matrix[0])):
+        if is_food(row, col, matrix):
+            block = []
+            checked = set()
+            block.append((row, col))
+            while block:
+                pair = block.pop()
+                r = pair[0]
+                c = pair[1]
+                around = check_around(r, c, matrix)
+                [block.append(new_pair) for new_pair in around]
+                matrix[r][c] = 'X'
+                checked.add(pair)
+
+            blocks_count += 1
+print(blocks_count)
