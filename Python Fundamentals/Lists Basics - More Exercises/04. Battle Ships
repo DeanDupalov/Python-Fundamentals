@@ -1,0 +1,29 @@
+def is_valid(r, c, multi_list):
+    return 0 <= r < len(multi_list) and 0 <= c < len((multi_list[0]))
+
+
+def is_ship(r, c, multi_list):
+    return multi_list[r][c] > 0
+
+
+def is_destroyed(r, c, multi_list):
+    return multi_list[r][c] <= 0
+
+
+rows_count = int(input())
+matrix = [[int(x) for x in input().split()] for _ in range(rows_count)]
+coordinates = [[int(y) for y in pair.split('-')] for pair in input().split()]
+
+destroyed_ships = 0
+
+for pair in coordinates:
+    row = pair[0]
+    col = pair[1]
+
+    if is_valid(row, col, matrix) and is_ship(row, col, matrix):
+        matrix[row][col] -= 1
+        if is_destroyed(row, col, matrix):
+            destroyed_ships += 1
+
+
+print(destroyed_ships)
