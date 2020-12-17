@@ -1,0 +1,19 @@
+def sum_numbers(a, b):
+    return a + b
+
+
+def subtract(one, two):
+    return one - two
+
+
+def add_and_subtract(a, b, c):
+    sum = sum_numbers(a, b)
+    result = subtract(sum, c)
+    return result
+
+
+num_one = int(input())
+num_two = int(input())
+num_three = int(input())
+
+print(add_and_subtract(num_one, num_two, num_three))
