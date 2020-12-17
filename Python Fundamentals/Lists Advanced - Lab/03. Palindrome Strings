@@ -1,0 +1,15 @@
+def is_palindrome_list(list):
+    new_list = []
+    for n in list:
+        if n == n[::-1]:
+            new_list.append(n)
+    return new_list
+
+
+words = [word for word in input().split()]
+word = input()
+
+palindrome_list = is_palindrome_list(words)
+palindrome_list.count(word)
+print(palindrome_list)
+print(f'Found palindrome {palindrome_list.count(word)} times')
