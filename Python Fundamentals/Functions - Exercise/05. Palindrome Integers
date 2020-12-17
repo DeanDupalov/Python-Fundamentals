@@ -1,0 +1,11 @@
+# s == s[::-1]
+def is_palindrome(list):
+    for n in list:
+        if n == n[::-1]:
+            print('True')
+        else:
+            print('False')
+
+
+num_str = [_ for _ in input().split(', ')]
+is_palindrome(num_str)
