@@ -1,0 +1,12 @@
+numbers = [int(num) for num in input().split()]
+factor = int(input())
+fac_num = lambda n: n * factor
+factored_numbers = list(map(fac_num, numbers))
+
+average = sum(factored_numbers) / len(factored_numbers)
+above_average = [num for num in factored_numbers if num >= average]
+
+if len(factored_numbers) // 2 <= len(above_average):
+    print(f"Score: {len(above_average)}/{len(factored_numbers)}. Employees are happy!")
+else:
+    print(f"Score: {len(above_average)}/{len(factored_numbers)}. Employees are not happy!")
