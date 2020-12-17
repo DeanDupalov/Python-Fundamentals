@@ -1,0 +1,151 @@
+import sys
+
+
+def exchange_index(arr, i):  # . [1, 2, 3, 4, 5] -> exchange 2 -> result: [4, 5, 1, 2, 3]
+    arr = arr[i + 1:] + arr[:i + 1]
+    return arr
+
+
+def index_max_even_odd(arr, pos):
+    max_even_num = -sys.maxsize
+    max_even_num_index = 0
+    max_odd_num = -sys.maxsize
+    max_odd_num_index = 0
+    for i, num in enumerate(arr):
+        if num % 2 == 0:
+            if num >= max_even_num:
+                max_even_num = num
+                max_even_num_index = i
+        else:  # odd
+            if num >= max_odd_num:
+                max_odd_num = num
+                max_odd_num_index = i
+
+    if pos == 'even':
+        if max_even_num == -sys.maxsize:
+            return 'No matches'
+        else:
+            return max_even_num_index
+    elif pos == 'odd':
+        if max_odd_num == -sys.maxsize:
+            return 'No matches'
+        else:
+            return max_odd_num_index
+
+
+def index_min_even_odd(arr, pos):
+    min_even_num = sys.maxsize
+    min_even_index = 0
+    min_odd_num = sys.maxsize
+    min_odd_index = 0
+    for i, num in enumerate(arr):
+        if num % 2 == 0:
+            if num <= min_even_num:
+                min_even_num = num
+                min_even_index = i
+        else:  # odd
+            if num <= min_odd_num:
+                min_odd_num = num
+                min_odd_index = i
+
+    if pos == 'even':
+        if min_even_num == sys.maxsize:
+            return 'No matches'
+        else:
+            return min_even_index
+    elif pos == 'odd':
+        if min_odd_num == sys.maxsize:
+            return 'No matches'
+        else:
+            return min_odd_index
+
+
+def first_x_even_odd_elements(arr, counter, pos):
+    even_elements = []
+    odd_elements = []
+    count_even = 0
+    count_odd = 0
+    for num in arr:
+        if num % 2 == 0:
+            if count_even == counter:
+                continue
+            count_even += 1
+            even_elements.append(num)
+        else:
+            if count_odd == counter:
+                continue
+            count_odd += 1
+            odd_elements.append(num)
+
+    if pos == 'even':
+        return even_elements
+    elif pos == 'odd':
+        return odd_elements
+
+
+def last_x_even_odd_elements(arr, counter, pos):
+    even_elements = []
+    odd_elements = []
+    count_even = 0
+    count_odd = 0
+    for i in range(len(arr) - 1, -1, -1):
+        if arr[i] % 2 == 0:
+            if count_even == counter:
+                continue
+            count_even += 1
+            even_elements.append(arr[i])
+
+        else:
+            if count_odd == counter:
+                continue
+            count_odd += 1
+            odd_elements.append(arr[i])
+
+    if pos == 'even':
+        even_elements.reverse()
+        return even_elements
+    elif pos == 'odd':
+        odd_elements.reverse()
+        return odd_elements
+
+
+numbers = [int(_) for _ in input().split()]
+data = input()
+
+while data != 'end':
+    tokens = data.split()
+    command = tokens[0]
+    if command == 'exchange':
+        index = int(tokens[1])
+        if index < 0 or index >= len(numbers):
+            print("Invalid index")
+        else:
+            numbers = exchange_index(numbers, index)
+
+    elif command == 'max':
+        position = tokens[1]
+        print(index_max_even_odd(numbers, position))
+
+    elif command == 'min':
+        position = tokens[1]
+        print(index_min_even_odd(numbers, position))
+
+    elif command == 'first':
+        count = int(tokens[1])
+        position = tokens[2]
+        if count > len(numbers):
+            print("Invalid count")
+        else:
+            print(first_x_even_odd_elements(numbers, count, position))
+
+    elif command == 'last':
+        count = int(tokens[1])
+        position = tokens[2]
+        if count > len(numbers):
+            print("Invalid count")
+        else:
+            print(last_x_even_odd_elements(numbers, count, position))
+
+    data = input()
+
+print(numbers)
