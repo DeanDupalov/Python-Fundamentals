@@ -1,0 +1,14 @@
+def sum_odd_and_sum_even(number):
+    sum_odd = 0
+    sum_even = 0
+    for n in number:
+        if int(n) % 2 == 0:
+            sum_even += int(n)
+        else:
+            sum_odd += int(n)
+
+    print(f'Odd sum = {sum_odd}, Even sum = {sum_even}')
+
+
+num = input()
+sum_odd_and_sum_even(num)
