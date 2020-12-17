@@ -1,0 +1,15 @@
+todo_notes = input()
+importance_list = [0] * 10
+
+while todo_notes != 'End':
+    tokens = todo_notes.split('-')
+    importance = int(tokens[0])
+    value = tokens[1]
+
+    importance_list.insert(importance, value)
+
+    todo_notes = input()
+
+importance_list = [n for n in importance_list if n != 0]
+
+print(importance_list)
