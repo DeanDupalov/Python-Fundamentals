@@ -1,0 +1,9 @@
+def print_ascii_between(start, end):
+    for i in range(start + 1, end):
+        print(chr(i), end=' ')
+
+
+char_one = ord(input())
+char_two = ord(input())
+
+print_ascii_between(char_one, char_two)
