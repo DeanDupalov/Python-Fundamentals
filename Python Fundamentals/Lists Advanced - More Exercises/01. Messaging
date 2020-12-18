@@ -1,0 +1,14 @@
+numbers = [[int(num) for num in sub_nums] for sub_nums in input().split()]
+text = list(input())
+
+indexes = [sum(sub_nums) for sub_nums in numbers]
+message = ''
+for index in indexes:
+    if 0 <= index > len(text):
+        index = index - len(text)
+        message += text.pop(index)
+        continue
+
+    message += text.pop(index)
+
+print(message)
