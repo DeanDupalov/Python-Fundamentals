@@ -1,0 +1,34 @@
+encrypted_string = input()
+numbers_str = []
+string_encrypt = []
+
+take_list = []
+skip_list = []
+
+for i in range(len(encrypted_string)):
+    if encrypted_string[i].isdigit():
+        numbers_str.append(encrypted_string[i])
+    else:
+        string_encrypt.append(encrypted_string[i])
+
+for j in range(len(numbers_str)):
+    num = int(numbers_str[j])
+    if j % 2 == 0:
+        take_list.append(num)
+    else:
+        skip_list.append(num)
+
+del numbers_str
+
+index_skip = 0
+
+result_list = []
+for i in range(len(take_list)):
+
+    result_list += string_encrypt[index_skip:index_skip + take_list[i]]
+
+    index_skip += take_list[i] + skip_list[i]
+
+
+for r in result_list:
+    print(r, end='')
