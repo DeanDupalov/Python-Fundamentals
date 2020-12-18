@@ -1,0 +1,19 @@
+numbers = list(map(int, input().split(", ")))
+min_wealth = int(input())
+is_not_possible = False
+for i, num in enumerate(numbers):
+    max_num = max(numbers)
+    index_max_num = numbers.index(max_num)
+
+    if num < min_wealth:
+        diff = min_wealth - num
+        if min_wealth <= max_num - diff:
+            numbers[i] += diff
+            numbers[index_max_num] -= diff
+        else:
+            is_not_possible = True
+            break
+if is_not_possible:
+    print('No equal distribution possible')
+else:
+    print(numbers)
