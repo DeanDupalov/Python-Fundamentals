@@ -1,0 +1,18 @@
+import math
+numbers = list(map(int, input().split(', ')))
+max_num = max(numbers)
+stop = max_num / 10
+boundary = 10
+
+while True:
+    print_list = []
+    for i, num in enumerate(numbers):
+        if boundary - 10 < num <= boundary:
+            print_list.append(num)
+
+    print(f"Group of {boundary}'s: {print_list}")
+
+    print_list.clear()
+    boundary += 10
+    if boundary > math.ceil(stop) * 10:
+        break
