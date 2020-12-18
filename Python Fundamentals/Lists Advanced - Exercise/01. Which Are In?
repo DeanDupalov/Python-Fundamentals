@@ -1,0 +1,20 @@
+# def unique(list1):
+#     unique_list = []
+#     for w in list1:
+#         if w not in unique_list:
+#             unique_list.append(w)
+#     return unique_list
+
+
+substrings_list = [_ for _ in input().split(', ')]
+# main_string_list = [_ for _ in input().split(', ')]
+main_string_list = input()
+
+new_list = []
+
+for word in substrings_list:
+
+    if word in main_string_list:
+        new_list.append(word)
+
+print(new_list)
