@@ -1,0 +1,4 @@
+nums = int(input().replace('.', ''))
+new_version = nums + 1
+
+print('.'.join(list(str(new_version))))
