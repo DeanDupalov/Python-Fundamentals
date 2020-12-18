@@ -1,0 +1,17 @@
+numbers = list(map(int, input().split()))
+left_car = 0
+right_car = 0
+for i in range(len(numbers) // 2):
+    left_car += numbers[i]
+    if numbers[i] == 0 and i != 0:
+        left_car = left_car * 0.80
+
+for j in range(len(numbers) - 1, len(numbers) // 2, -1):
+    right_car += numbers[j]
+    if numbers[j] == 0 and j != len(numbers) - 1:
+        right_car = right_car * 0.80
+
+if left_car <= right_car:
+    print(f"The winner is left with total time: {left_car:.1f}")
+elif left_car > right_car:
+    print(f"The winner is right with total time: {right_car:.1f}")
