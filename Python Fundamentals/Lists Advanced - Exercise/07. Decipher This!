@@ -1,0 +1,19 @@
+def check_digit(string):
+    c = ''
+    end = ''
+    for i in range(len(string)):
+        if string[i].isdigit():
+            c += string[i]
+        else:
+            end += string[i]
+
+    return chr(int(c)) + end
+
+data = input().split()
+
+
+for arg in data:
+    word1 = check_digit(arg)
+    word = list(word1)
+    word[1], word[-1] = word[-1], word[1]
+    print(''.join(word), end=' ')
