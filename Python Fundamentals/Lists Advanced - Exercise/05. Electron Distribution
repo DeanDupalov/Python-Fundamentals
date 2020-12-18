@@ -1,0 +1,14 @@
+electrons = int(input())
+index = 0
+electrons_list = []
+while electrons > 0:
+    shell = 2 * (index + 1) ** 2
+    index += 1
+    if shell > electrons:
+        electrons_list.append(electrons)
+        break
+    else:
+        electrons -= shell
+        electrons_list.append(shell)
+
+print(electrons_list)
