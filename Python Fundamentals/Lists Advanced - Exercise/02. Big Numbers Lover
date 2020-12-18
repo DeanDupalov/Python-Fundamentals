@@ -1,0 +1,5 @@
+numb_str = input().split()
+new_list = sorted(numb_str, reverse=True)
+
+for n in new_list:
+    print(n, end='')
