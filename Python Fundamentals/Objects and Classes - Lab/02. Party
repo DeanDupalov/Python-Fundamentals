@@ -1,0 +1,24 @@
+class Party:
+    def __init__(self):
+        self.people = []
+
+    def going(self, name):
+        self.people.append(name)
+
+    def get_going(self):
+        return f"Going: {', '.join(self.people)}"
+
+    def get_count(self):
+        return f'Total: {len(self.people)}'
+
+
+party_one = Party()
+
+while True:
+    name = input()
+    if name == 'End':
+        break
+    party_one.going(name)
+
+print(party_one.get_going())
+print(party_one.get_count())
