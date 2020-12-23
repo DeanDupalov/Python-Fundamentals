@@ -1,0 +1,18 @@
+product_dict = {}
+
+while True:
+    data = input()
+    if data == 'statistics':
+        break
+    tokens = data.split(': ')
+    product = tokens[0]
+    quantity = int(tokens[1])
+    if product not in product_dict:
+        product_dict[product] = 0
+    product_dict[product] += quantity
+
+print("Products in stock:")
+for k, v in product_dict.items():
+    print(f'- {k}: {v}')
+print(f'Total Products: {len(product_dict)}')
+print(f'Total Quantity: {sum(product_dict.values())}')
