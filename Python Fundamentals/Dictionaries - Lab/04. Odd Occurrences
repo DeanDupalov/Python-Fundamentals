@@ -1,0 +1,22 @@
+def get_lower_words(words):
+    dictionary = {}
+    for word in words:
+        lower_word = word.lower()
+        if lower_word not in dictionary:
+            dictionary[lower_word] = 0
+        dictionary[lower_word] += 1
+    return dictionary
+
+
+def print_dict(dictionary):
+    for k, v in dictionary.items():
+        if v % 2 != 0:
+            print(k, end=' ')
+
+
+def solve():
+    print_dict(get_lower_words(words))
+
+
+words = input().split()
+solve()
