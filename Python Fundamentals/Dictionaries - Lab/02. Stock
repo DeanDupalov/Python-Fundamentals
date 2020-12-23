@@ -1,0 +1,27 @@
+def products_to_dict(elements):
+    store = {}
+    n = len(elements)
+    for i in range(0, n, 2):
+        key = elements[i]
+        value = int(elements[i + 1])
+        store[key] = value
+    return store
+
+
+def check_product(products_dict, items):
+    for item in items:
+        if item not in products_dict:
+            print(f"Sorry, we don't have {item}")
+        else:
+            print(f"We have {products_dict[item]} of {item} left")
+
+
+def solve():
+    products_dict = products_to_dict(products)
+    check_product(products_dict, products_to_check)
+
+
+products = input().split()
+products_to_check = input().split()
+
+solve()
