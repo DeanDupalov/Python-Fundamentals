@@ -1,0 +1,21 @@
+def read_n_lines(n):
+    return [input() for _ in range(n)]
+
+
+def solve(lines):
+    words_synonyms_dict = {}
+    n = len(lines)
+    for i in range(0, n, 2):
+        word = lines[i]
+        synonym = lines[i + 1]
+        if word not in words_synonyms_dict:
+            words_synonyms_dict[word] = []
+        words_synonyms_dict[word].append(synonym)
+
+    for w, s in words_synonyms_dict.items():
+        print(f"{w} - {', '.join(s)}")
+
+
+n = int(input())
+lines = read_n_lines(n * 2)
+solve(lines)
