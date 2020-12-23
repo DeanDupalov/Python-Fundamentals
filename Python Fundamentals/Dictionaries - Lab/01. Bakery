@@ -1,0 +1,17 @@
+def elements_to_dict(elements):
+    bakery = {}
+    n = len(elements)
+    for i in range(0, n, 2):
+        key = elements[i]
+        value = int(elements[i + 1])
+        bakery[key] = value
+    return bakery
+
+
+def solve():
+    elements = input().split()
+    dict_element = elements_to_dict(elements)
+    print(dict_element)
+
+
+solve()
