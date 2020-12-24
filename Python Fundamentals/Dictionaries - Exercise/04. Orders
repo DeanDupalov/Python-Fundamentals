@@ -1,0 +1,36 @@
+def valid_key_existing(my_dict, key, def_value=0):
+    if key not in my_dict:
+        my_dict[key] = def_value
+
+
+def price_check(my_dict, key, new_price):
+    if my_dict[key] != new_price:
+        my_dict[key] = new_price
+
+
+def read_until_command(command):
+    while True:
+        data = input()
+        if data == command:
+            break
+        tokens = data.split()
+        name = tokens[0]
+        price = float(tokens[1])
+        quantity = int(tokens[2])
+
+        valid_key_existing(products_price, name)
+        price_check(products_price, name, price)
+
+        valid_key_existing(products_quantities, name)
+        products_quantities[name] += quantity
+
+
+def print_output(my_dict):
+    for (k, v) in my_dict.items():
+        print(f'{k} -> {(v * products_price[k]):.2f}')
+
+
+products_price = {}
+products_quantities = {}
+read_until_command('buy')
+print_output(products_quantities)
