@@ -1,0 +1,29 @@
+def remove_space_from_string(string):
+    string = ''.join(string.split())
+    return string
+
+
+def get_count_char(string):
+    string = remove_space_from_string(string)
+    char_dict = {}
+    for i in range(len(string)):
+        key = string[i]
+        if key not in char_dict:
+            char_dict[key] = 0
+        char_dict[key] += 1
+    return char_dict
+
+
+def print_format(dict_char):
+    for (k, v) in dict_char.items():
+        print(f'{k} -> {v}')
+
+
+def solve(string):
+    string = remove_space_from_string(string)
+    char_dict = get_count_char(string)
+    print_format(char_dict)
+
+
+text = input()
+solve(text)
