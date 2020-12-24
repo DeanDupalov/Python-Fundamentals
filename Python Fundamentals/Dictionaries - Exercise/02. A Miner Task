@@ -1,0 +1,19 @@
+data_list = []
+resources = {}
+
+while True:
+    data = input()
+    if data == 'stop':
+        break
+
+    data_list.append(data)
+n = len(data_list)
+for i in range(0, n, 2):
+    key = data_list[i]
+    value = int(data_list[i + 1])
+    if key not in resources:
+        resources[key] = 0
+    resources[key] += value
+
+for (k, v) in resources.items():
+    print(f'{k} -> {v}')
