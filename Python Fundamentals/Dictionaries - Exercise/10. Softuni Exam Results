@@ -1,0 +1,54 @@
+judge_dict = {}
+user_max_point = {}
+languages_submissions = {}
+
+while True:
+    data = input()
+    if data == 'exam finished':
+        break
+
+    tokens = data.split('-')
+    student = tokens[0]
+    language = tokens[1]
+
+    if language == 'banned':
+        del judge_dict[student]
+    else:
+        if language not in languages_submissions:
+            languages_submissions[language] = 0
+        languages_submissions[language] += 1
+
+        points = int(tokens[2])
+        if student not in judge_dict:
+            judge_dict[student] = {}
+
+        if language not in judge_dict[student]:
+            judge_dict[student][language] = {}
+
+        if not judge_dict[student][language]:
+            judge_dict[student][language] = 0
+
+        else:
+            old_points = judge_dict[student][language]
+            if points < old_points:
+                continue
+        judge_dict[student][language] = points
+
+for key, val in judge_dict.items():
+    max_points = 0
+    for k, p in val.items():
+        if p > max_points:
+            max_points = p
+    user_max_point[key] = max_points
+
+sorted_user_points = dict(sorted(user_max_point.items(), key=lambda o: (-o[1],o[0])))
+sorted_languages = dict(sorted(languages_submissions.items(), key=lambda y: (-y[1], y[0])))
+
+print('Results:')
+for k, v in sorted_user_points.items():
+    print(f'{k} | {v}')
+
+print('Submissions:')
+
+for i, j in sorted_languages.items():
+    print(f'{i} - {j}')
