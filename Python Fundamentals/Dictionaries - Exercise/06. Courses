@@ -1,0 +1,34 @@
+def read_until_command(the_command):
+    log_book = {}
+
+    while True:
+        data = input()
+        if data == 'end':
+            break
+        tokens = data.split(' : ')
+        course_name = tokens[0]
+        student_name = tokens[1]
+
+        if course_name not in log_book:
+            log_book[course_name] = []
+        log_book[course_name].append(student_name)
+
+    return log_book
+
+
+def sort_dict_value_ascending(my_dict):
+    for key in my_dict:
+        my_dict[key].sort()
+
+
+def print_format(my_dict):
+    for key in my_dict:
+        print(f'{key}: {len(my_dict[key])}')
+        for name in my_dict[key]:
+            print(f'-- {name}')
+
+
+uni_dict = read_until_command('end')
+sorted_uni_dict = dict(sorted(uni_dict.items(), key=lambda elements: -len(elements[1])))
+sort_dict_value_ascending(sorted_uni_dict)
+print_format(sorted_uni_dict)
