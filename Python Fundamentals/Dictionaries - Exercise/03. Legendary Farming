@@ -1,0 +1,48 @@
+def get_legendary_item(key):
+    if key == 'shards':
+        return 'Shadowmourne'
+    elif key == 'fragments':
+        return 'Valanyr'
+    elif key == 'motes':
+        return 'Dragonwrath'
+
+
+def is_enough_quantity(dict_materials, key):
+    if dict_materials[key] >= 250:
+        return True
+
+
+def print_format(my_dict):
+    for k in my_dict:
+        print(f'{k}: {my_dict[k]}')
+
+
+key_materials = {'fragments': 0,
+                 'shards': 0,
+                 'motes': 0}
+junk_dict = {}
+winner = ''
+
+while winner == '':
+    tokens = input().split()
+    n = len(tokens)
+    for i in range(0, n, 2):
+        quantity = int(tokens[i])
+        material = tokens[i + 1].lower()
+
+        if material in key_materials:
+            key_materials[material] += quantity
+            if is_enough_quantity(key_materials, material):
+                winner = get_legendary_item(material)
+                key_materials[material] -= 250
+                break
+        else:
+            if material not in junk_dict:
+                junk_dict[material] = 0
+            junk_dict[material] += quantity
+
+sorted_key_materials = dict(sorted(key_materials.items(), key=lambda element: (-element[1],element[0])))
+sorted_junk_dict = dict(sorted(junk_dict.items(),key=lambda el: el[0]))
+print(f'{winner} obtained!')
+print_format(sorted_key_materials)
+print_format(sorted_junk_dict)
