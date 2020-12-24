@@ -1,0 +1,26 @@
+def read_until_command(the_command):
+    companies = {}
+
+    while True:
+        data = input()
+        if data == the_command:
+            break
+        tokens = data.split(' -> ')
+        company = tokens[0]
+        id_number = tokens[1]
+
+        if company not in companies:
+            companies[company] = []
+        if id_number not in companies[company]:
+            companies[company].append(id_number)
+    return companies
+
+
+companies = read_until_command('End')
+
+sorted_companies = dict(sorted(companies.items(), key=lambda x: x[0]))
+for (k, v) in sorted_companies.items():
+    print(f"{k}")
+
+    for i in v:
+        print(f'-- {i}')
