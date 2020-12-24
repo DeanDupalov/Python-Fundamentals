@@ -1,0 +1,34 @@
+def get_average_grade(my_dict):
+    average_dict = {}
+    for key, v in my_dict.items():
+        average_grade = sum(v) / len(v)
+        if average_grade < 4.5:
+            continue
+        average_dict[key] = average_grade
+    return average_dict
+
+
+def read_in_range_get_dict(n_rang):
+    grade_book = {}
+    for line in range(n_rang):
+        student_name = input()
+        student_grade = float(input())
+
+        if student_name not in grade_book:
+            grade_book[student_name] = []
+        grade_book[student_name].append(student_grade)
+
+    return grade_book
+
+
+def print_dict(my_dict, template):
+    for (k, v) in my_dict.items():
+        print(template.format(k, v))
+
+
+lines = int(input())
+grades_dict = read_in_range_get_dict(lines)
+filtered_dict = get_average_grade(grades_dict)
+sorted_grade_dict = dict(sorted(filtered_dict.items(), key=lambda el: el[1], reverse=True))
+
+print_dict(sorted_grade_dict, "{} -> {:.2f}")
