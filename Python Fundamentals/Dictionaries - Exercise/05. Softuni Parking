@@ -1,0 +1,27 @@
+n_lines = int(input())
+
+parking_dict = {}
+
+for i in range(n_lines):
+    data = input().split()
+    command = data[0]
+    username = data[1]
+    if command == 'register':
+        licence_plate = data[2]
+        if username in parking_dict:
+            print(f"ERROR: already registered with plate number {parking_dict[username]}")
+            continue
+        parking_dict[username] = licence_plate
+        print(f"{username} registered {parking_dict[username]} successfully")
+
+    elif command == 'unregister':
+        if username not in parking_dict:
+            print(f"ERROR: user {username} not found")
+            continue
+        parking_dict.pop(username)
+        print(f"{username} unregistered successfully")
+    else:
+        print("Invalid command. Try again!")
+
+for key in parking_dict:
+    print(f"{key} => {parking_dict[key]}")
