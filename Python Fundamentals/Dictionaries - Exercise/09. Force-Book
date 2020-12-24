@@ -1,0 +1,50 @@
+force_book = {}
+
+while True:
+    data = input()
+    if data == "Lumpawaroo":
+        break
+
+    if ' | ' in data:
+        tokens = data.split(' | ')
+        [side, user] = tokens
+
+        all_users = [item for current_list in force_book.values() for item in current_list]
+
+        if user in all_users:
+            continue
+
+        if side not in force_book:
+            force_book[side] = []
+        force_book[side].append(user)
+
+    else:
+        tokens = data.split(' -> ')
+        [user, side] = tokens
+
+        side_user = ""
+
+        for k, v in force_book.items():
+            if user in v:
+                side_user = k
+                break
+
+        if side_user != "":
+            force_book[side_user].remove(user)
+
+        if side not in force_book:
+            force_book[side] = []
+        force_book[side].append(user)
+        print(f"{user} joins the {side} side!" )
+
+# for k in force_book:
+#     force_book[k].sort()
+
+sorted_force_book = dict(sorted(force_book.items(), key=lambda el: (-len(el[1]), el[0])))
+
+for key, v in sorted_force_book.items():
+    n = len(sorted_force_book[key])
+    if n > 0:
+        print(f'Side: {key}, Members: {len(v)}')
+        for item in sorted(v):
+            print(f'! {item}')
