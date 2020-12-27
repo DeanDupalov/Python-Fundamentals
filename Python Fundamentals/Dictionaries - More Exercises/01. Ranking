@@ -1,0 +1,60 @@
+def read_until_command(my_dict, the_command):
+    while True:
+        data = input()
+        if data == the_command:
+            break
+        [contest, password] = data.split(':')
+        if contest not in my_dict:
+            my_dict[contest] = ''
+        my_dict[contest] = password
+
+
+def find_best_user(my_dict):
+    best_user = ''
+    total_points = 0
+    for k, v in my_dict.items():
+        user_points = 0
+        for c, p in v.items():
+            user_points += p
+        if user_points > total_points:
+            total_points = user_points
+            best_user = k
+    return [best_user, total_points]
+
+
+contests_dict = {}
+read_until_command(contests_dict, "end of contests")
+users_data = {}
+
+while True:
+    args = input()
+    if args == "end of submissions":
+        break
+
+    [contest, password, username, points_str] = args.split('=>')
+    if contests_dict.get(contest) != password:
+        continue
+    points = int(points_str)
+
+    if username not in users_data:
+        users_data[username] = {}
+    if contest not in users_data[username]:
+        users_data[username][contest] = {}
+    if not users_data[username][contest]:
+        users_data[username][contest] = 0
+    elif users_data[username][contest] >= points:
+        continue
+    users_data[username][contest] = points
+
+user = find_best_user(users_data)[0]
+total_points = find_best_user(users_data)[1]
+
+users_data = dict(sorted(users_data.items(), key=lambda x: x[0]))
+
+print(f"Best candidate is {user} with total {total_points} points.")
+print('Ranking:')
+for k, v in users_data.items():
+    print(f'{k}')
+    v = dict(sorted(v.items(), key=lambda y: -y[1]))
+    for c, p in v.items():
+        print(f'#  {c} -> {p}')
