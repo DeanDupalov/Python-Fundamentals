@@ -1,0 +1,64 @@
+def get_total_points_per_player(my_dict):
+    total_points = {}
+    for keys in my_dict:
+        if keys not in total_points:
+            total_points[keys] = 0
+        for ks, ps in my_dict[keys].items():
+            total_points[keys] += ps
+    return total_points
+
+
+def format_to_print(total_points_per_player):
+    for name, points in total_points_per_player.items():
+        print(f"{name}: {points} skill")
+        players_pool[name] = dict(sorted(players_pool[name].items(), key=lambda y: (-y[1], y[0])))
+        for positions, skills in players_pool[name].items():
+            print(f"- {positions} <::> {skills}")
+
+
+def solve():
+    players_pool = {}
+    while True:
+        data = input()
+        if data == 'Season end':
+            break
+
+        if ' -> ' in data:
+            [player, position, skill_str] = data.split(' -> ')
+            skill = int(skill_str)
+
+            if player not in players_pool:
+                players_pool[player] = {}
+            if position not in players_pool[player]:
+                players_pool[player][position] = {}
+            if not players_pool[player][position]:
+                players_pool[player][position] = 0
+            else:
+                old_skill = players_pool[player][position]
+                if old_skill > skill:
+                    continue
+            players_pool[player][position] = skill
+        else:
+            [player_1, player_2] = data.split(' vs ')
+
+            if player_1 not in players_pool or player_2 not in players_pool:
+                continue
+
+            for k in players_pool[player_1]:
+                if k in players_pool[player_2]:
+                    if players_pool[player_1][k] > players_pool[player_2][k]:
+                        del players_pool[player_2]
+                        break
+                    elif players_pool[player_1][k] < players_pool[player_2][k]:
+                        del players_pool[player_1]
+                        break
+                    else:
+                        continue
+    return players_pool
+
+
+players_pool = solve()
+total_points_per_player = get_total_points_per_player(players_pool)
+
+total_points_per_player = dict(sorted(total_points_per_player.items(), key=lambda x: (-x[1], x[0])))
+format_to_print(total_points_per_player)
