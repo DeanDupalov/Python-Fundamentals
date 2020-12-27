@@ -1,0 +1,45 @@
+contests_dict = {}
+users_total_points = {}
+while True:
+    data = input()
+    if data == "no more time":
+        break
+
+    [username, contest, points_str] = data.split(' -> ')
+    points = int(points_str)
+
+    if contest not in contests_dict:
+        contests_dict[contest] = {}
+
+    if username not in contests_dict[contest]:
+        contests_dict[contest][username] = {}
+
+    if not contests_dict[contest][username]:
+        contests_dict[contest][username] = 0
+    else:
+        if points < contests_dict[contest][username]:
+            continue
+    contests_dict[contest][username] = points
+
+for key, v in contests_dict.items():
+    for name, p in v.items():
+        if name not in users_total_points:
+            users_total_points[name] = 0
+        users_total_points[name] += p
+
+users_total_points = dict(sorted(users_total_points.items(), key=lambda x: (-x[1], x[0])))
+
+for k, val in contests_dict.items():
+    l = len(contests_dict[k])
+    print(f'{k}: {l} participants')
+    val = dict(sorted(val.items(), key=lambda el: (-el[1], el[0])))
+    position = 1
+    for n, point in val.items():
+        print(f'{position}. {n} <::> {point}')
+        position += 1
+
+print('Individual standings:')
+position = 1
+for s, score in users_total_points.items():
+    print(f'{position}. {s} -> {score}')
+    position += 1
