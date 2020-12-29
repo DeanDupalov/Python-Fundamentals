@@ -1,0 +1,12 @@
+def revers_str_until_command(end_command):
+
+    while True:
+        text = input()
+        if text == end_command:
+            break
+
+        print(f'{text} = {text[::-1]}')
+
+
+command = 'end'
+revers_str_until_command(command)
