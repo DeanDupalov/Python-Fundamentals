@@ -1,0 +1,10 @@
+def get_substring(word, text):
+    while word in text:
+        text = text.replace(word, '')
+
+    return text
+
+
+word = input()
+text = input()
+print(get_substring(word, text))
