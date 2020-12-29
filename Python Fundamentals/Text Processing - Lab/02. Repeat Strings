@@ -1,0 +1,10 @@
+def repeat_str(words):
+    string = ''
+    for word in words:
+        string += word * len(word)
+
+    return string
+
+
+words = input().split()
+print(repeat_str(words))
