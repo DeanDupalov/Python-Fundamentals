@@ -1,0 +1,5 @@
+text = input()
+
+for i, char in enumerate(text):
+    if char == ':':
+        print(char + text[i + 1])
