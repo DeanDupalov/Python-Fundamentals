@@ -1,0 +1,10 @@
+def get_encrypted_text(s):
+    encrypted_text = ''
+    for char in s:
+        new_char = chr(ord(char) + 3)
+        encrypted_text += new_char
+    return encrypted_text
+
+
+text = input()
+print(get_encrypted_text(text))
