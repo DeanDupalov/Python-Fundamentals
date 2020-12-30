@@ -1,0 +1,6 @@
+data = input().split('\\')
+
+file_list = data[-1].split('.')
+[file_name, file_extension] = file_list
+print(f'File name: {file_name}')
+print(f'File extension: {file_extension}')
