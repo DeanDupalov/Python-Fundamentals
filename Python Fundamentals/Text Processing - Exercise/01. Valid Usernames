@@ -1,0 +1,29 @@
+def check_valid_length(s):
+    valid_length = False
+    if 3 <= len(s) <= 16:
+        valid_length = True
+    return valid_length
+
+
+def check_valid_symbols(s):
+    is_valid = True
+    for ch in s:
+        if not ch.isdigit() and not ch.isalpha() and ch != '-' and ch != '_':
+            is_valid = False
+            break
+    return is_valid
+
+
+def solve(l):
+    valid_list = []
+    for word in data:
+        if check_valid_length(word) and check_valid_symbols(word):
+            valid_list.append(word)
+
+    return valid_list
+
+
+data = input().split(', ')
+valid_list = solve(data)
+
+[print(w) for w in valid_list]
