@@ -1,0 +1,28 @@
+text = input()
+
+index = 0
+result = ''
+start_index = 0
+
+while index < len(text):
+    if text[index].isdigit():
+        num_str = text[index]
+        next_index = 1
+
+        if index + 1 < len(text) and text[index + 1].isdigit():
+            num_str += text[index + 1]
+            next_index = 2
+
+        num = int(num_str)
+        result += text[start_index: index] * num
+
+        if index + 1 > len(text):
+            break
+
+        start_index = index + next_index
+
+    index += 1
+
+result = result.upper()
+print(f'Unique symbols used: {len(set(result))}')
+print(result)
