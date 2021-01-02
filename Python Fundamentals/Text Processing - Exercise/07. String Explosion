@@ -1,0 +1,13 @@
+text = input()
+
+n = len(text)
+power = 0
+for i in range(n):
+    char = text[i]
+    if char == '>':
+        power += int(text[i + 1])
+    elif power > 0:
+        text = text[:i] + '_' + text[i + 1:]
+        power -= 1
+text = text.replace('_', '')
+print(text)
