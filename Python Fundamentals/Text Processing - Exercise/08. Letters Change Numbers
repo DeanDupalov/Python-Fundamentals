@@ -1,0 +1,31 @@
+def get_letter_position(letter):
+    num = 96
+    if letter.isupper():
+        num = 64
+    return ord(letter) - num
+
+
+tokens = input().split()
+total = 0
+
+for part in tokens:
+    f_letter = part[0]
+    f_num = get_letter_position(f_letter)
+    l_letter = part[-1]
+    l_num = get_letter_position(l_letter)
+    num = int(part[1:-1])
+
+    cur_result = 0
+    if f_letter.isupper():
+        cur_result += num / f_num
+    else:
+        cur_result += num * f_num
+
+    if l_letter.isupper():
+        cur_result -= l_num
+    else:
+        cur_result += l_num
+
+    total += cur_result
+
+print(f'{total:.2f}')
