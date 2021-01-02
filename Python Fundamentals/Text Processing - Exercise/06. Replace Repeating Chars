@@ -1,0 +1,7 @@
+text = input()
+simple_text = ' '
+for char in text:
+    if char != simple_text[-1]:
+        simple_text += char
+
+print(simple_text.lstrip())
