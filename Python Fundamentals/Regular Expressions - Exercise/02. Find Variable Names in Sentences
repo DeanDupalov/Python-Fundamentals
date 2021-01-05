@@ -1,0 +1,12 @@
+import re
+
+pattern = r"\b_{1}[A-Za-z]+\b"
+
+text = input()
+
+results = re.findall(pattern, text)
+output = []
+
+for word in results:
+    output.append(word[1:])
+print(','.join(output))
