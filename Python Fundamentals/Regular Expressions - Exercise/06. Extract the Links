@@ -1,0 +1,20 @@
+import re
+
+pattern = r"www\.([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)(\.[a-z]+)+"
+
+
+text = input()
+emails = []
+while True:
+    if not text:
+        break
+
+    matches = re.finditer(pattern, text)
+
+    for match in matches:
+        emails.append(match.group())
+
+    text = input()
+
+for email in emails:
+    print(email)
