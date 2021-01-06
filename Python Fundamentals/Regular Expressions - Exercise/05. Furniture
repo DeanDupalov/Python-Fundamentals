@@ -1,0 +1,22 @@
+import re
+
+pattern = r">>(?P<item>[A-Za-z]+)<<(?P<price>[0-9]+(\.[0-9]+)?)!(?P<count>\d+)$"
+total_money = 0
+all_furniture = []
+while True:
+    text = input()
+    if text == "Purchase":
+        break
+
+    matches = re.finditer(pattern, text)
+
+    for match in matches:
+        money = int(match.group('count')) * float(match.group('price'))
+        all_furniture.append(match.group('item'))
+        total_money += money
+
+
+print("Bought furniture:")
+for item in all_furniture:
+    print(item)
+print(f"Total money spend: {total_money:.2f}")
