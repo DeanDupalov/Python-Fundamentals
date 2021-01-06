@@ -1,0 +1,11 @@
+import re
+
+
+text = input()
+user_pattern = r"\s[a-z0-9]+([\_\.\+\-][0-9a-z]+)*"
+host_pattern = r"[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+[a-zA-Z0-9-\.]*\b"
+pattern = rf"{user_pattern}@{host_pattern}"
+emails = re.finditer(pattern, text, re.IGNORECASE)
+
+for email in emails:
+    print(email.group())
