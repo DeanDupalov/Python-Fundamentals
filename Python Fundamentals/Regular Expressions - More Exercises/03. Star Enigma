@@ -1,0 +1,39 @@
+import re
+
+lines = int(input())
+
+decrypt_info = []
+
+for i in range(0, lines):
+    text = input()
+    pattern_star = r'[s|t|a|r]'
+    ascii_back_num = re.findall(pattern_star, text, re.IGNORECASE)
+    back_num = len(ascii_back_num)
+    message = ''
+    for ch in text:
+        new_ch_num = ord(ch) - back_num
+        message += chr(new_ch_num)
+    decrypt_info.append(message)
+
+
+pattern = r'\@(?P<name>[A-Za-z]+)[^@\-!:]*\:(\d+)[^@\-!:]*\!(?P<command>[A|D])\![^@\-!:]*\-\>(\d+)'
+#pattern = r'\@(?P<name>[A-Za-z]+)[^@\-!:]*\:[^@\-!:]*(\d+)\![^@\-!:]*(\b?P<command>[A|D])[^@\-!:]*\![^@\-!:]*\-\>(\d+)[^@\-!:]*'
+attacked_list = []
+destroyed_list = []
+for decrypt_m in decrypt_info:
+    matches = re.finditer(pattern, decrypt_m)
+    for match in matches:
+        command = match.group('command')
+        planet_name = match.group('name')
+        if command == 'A':
+            attacked_list.append(planet_name)
+        else:
+            destroyed_list.append(planet_name)
+
+attacked_list.sort()
+destroyed_list.sort()
+
+print(f'Attacked planets: {len(attacked_list)}')
+[print(f'-> {p}')for p in attacked_list]
+print(f'Destroyed planets: {len(destroyed_list)}')
+[print(f'-> {p}')for p in destroyed_list]
