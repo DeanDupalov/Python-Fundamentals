@@ -1,0 +1,32 @@
+import re
+
+
+pattern_customer = r'(?P<customer>[A-Z][a-z]+)'
+pattern_product = r'(?P<product>\w+)'
+pattern_count = r'(?P<count>\d+)'
+pattern_price = r'(?P<price>[0-9]+(\.?[0-9]+))'
+
+pattern = rf'\%{pattern_customer}\%[^\|\$\%\.]*\<{pattern_product}\>' \
+          rf'[^\|\$\%\.]*\|{pattern_count}\|[^\|\$\%\.\d]*{pattern_price}\$'
+
+income = 0.0
+
+while True:
+    order = input()
+
+    if order == 'end of shift':
+        break
+
+    matches = re.finditer(pattern, order)
+
+    for match in matches:
+        item_price = float(match.group('price'))
+        item_count = int(match.group('count'))
+        customer = match.group('customer')
+        item = match.group('product')
+        total = item_count * item_price
+        income += total
+
+        print(f'{customer}: {item} - {total:.2f}')
+
+print(f'Total income: {income:.2f}')
