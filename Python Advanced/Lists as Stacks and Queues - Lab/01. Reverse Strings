@@ -1,0 +1,30 @@
+class Stack:
+
+    def __init__(self):
+        self.internal_values = []
+
+    def push(self, value):
+        return self.internal_values.append(value)
+
+    def pop(self):
+        return self.internal_values.pop()
+
+    def peek(self):
+        return self.internal_values[-1]
+
+    @property
+    def is_empty(self):
+        return len(self.internal_values) == 0
+
+
+text = input()
+s = Stack()
+
+[s.push(ch) for ch in text]
+reversed_str = ''
+
+while not s.is_empty:
+    reversed_str += s.pop()
+
+
+print(reversed_str)
