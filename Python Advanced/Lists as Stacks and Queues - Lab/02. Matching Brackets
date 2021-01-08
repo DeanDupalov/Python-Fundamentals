@@ -1,0 +1,37 @@
+class Stack:
+
+    def __init__(self):
+        self.internal_values = []
+
+    def push(self, value):
+        return self.internal_values.append(value)
+
+    def pop(self):
+        return self.internal_values.pop()
+
+    def peek(self):
+        return self.internal_values[-1]
+
+    @property
+    def is_empty(self):
+        return len(self.internal_values) == 0
+
+
+def solve():
+    stack_start_index = Stack()
+    end_index = 0
+    string = input()
+
+    for i in range(len(string)):
+        ch = string[i]
+
+        if ch == '(':
+            stack_start_index.push(i)
+
+        elif ch == ')':
+            start_index = stack_start_index.pop()
+            end_index = i
+            print(string[start_index:end_index + 1])
+
+
+solve()
