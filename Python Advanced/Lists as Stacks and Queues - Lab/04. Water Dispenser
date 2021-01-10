@@ -1,0 +1,37 @@
+from collections import deque
+
+total_water = int(input())
+
+names = deque()
+
+while True:
+    name = input()
+    if name == 'Start':
+        break
+    names.append(name)
+
+while True:
+    name = input()
+
+    if name == 'End':
+        break
+
+    if name.isdigit():
+        litters = int(name)
+        person = names.popleft()
+
+        if litters > total_water:
+
+            print(f'{person} must wait')
+            continue
+
+        print(f'{person} got water')
+        total_water -= litters
+
+    if name.startswith('refill'):
+        args = name.split()
+        pop_up_litters = int(args[1])
+
+        total_water += pop_up_litters
+
+print(f'{total_water} liters left')
