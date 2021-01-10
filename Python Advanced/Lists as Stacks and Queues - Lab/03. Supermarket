@@ -1,0 +1,18 @@
+from collections import deque
+
+names = deque()
+
+while True:
+    name = input()
+
+    if name == 'End':
+        break
+
+    if name == 'Paid':
+        while names:
+            pop_name = names.popleft()
+            print(pop_name)
+        continue
+    names.append(name)
+
+print(f'{len(names)} people remaining.')
