@@ -1,0 +1,22 @@
+from collections import deque
+names = deque()
+
+[names.append(name) for name in input().split()]
+turn = int(input())
+i = 0
+while True:
+
+    if len(names) == 1:
+        p = names.popleft()
+        print(f'Last is {p}')
+        break
+
+    person = names.popleft()
+    i += 1
+
+    if i != turn:
+        names.append(person)
+
+    else:
+        print(f'Removed {person}')
+        i = 0
