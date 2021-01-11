@@ -1,0 +1,5 @@
+nums_stack = []
+
+[nums_stack.append(int(_))for _ in input().split()]
+
+[print(nums_stack.pop(), end=' ') for _ in range(len(nums_stack))]
