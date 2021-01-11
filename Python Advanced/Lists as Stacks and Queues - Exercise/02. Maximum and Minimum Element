@@ -1,0 +1,32 @@
+n_lines = int(input())
+num_stack = []
+for i in range(1, n_lines + 1):
+    args = input().split()
+    command = int(args[0])
+
+    if command == 1:
+        num = int(args[1])
+        num_stack.append(num)
+
+    elif command == 2:
+        if len(num_stack) == 0:
+            continue
+
+        num_stack.pop()
+
+    elif command == 3:
+        if len(num_stack) == 0:
+            continue
+        print(max(num_stack))
+
+    elif command == 4:
+        if len(num_stack) == 0:
+            continue
+        print(min(num_stack))
+
+num_str = []
+for i in range(len(num_stack)):
+    el = num_stack.pop()
+    num_str.append(str(el))
+
+print(', '.join(num_str))
