@@ -1,0 +1,22 @@
+stack_clothes = [int(_) for _ in input().split()]
+org_size = int(input())
+rack_size = org_size
+sum_clothes = 0
+total_racks = 0
+
+while stack_clothes:
+    el = stack_clothes.pop()
+
+    if el > rack_size:
+        total_racks += 1
+        rack_size = org_size
+        stack_clothes.append(el)
+        continue
+
+    if len(stack_clothes) == 0:
+        rack_size -= el
+        total_racks += 1
+    else:
+        rack_size -= el
+
+print(total_racks)
