@@ -1,0 +1,25 @@
+from collections import deque
+
+lines = int(input())
+deque_stations = deque()
+
+for _ in range(lines):
+    station = [int(x) for x in input().split()]
+    deque_stations.append(station)
+
+for i in range(lines):
+    gas = 0
+    is_valid = True
+    for _ in range(lines):
+        current_pump = deque_stations.popleft()
+        gas += current_pump[0] - current_pump[1]
+
+        if gas < 0:
+            is_valid = False
+        deque_stations.append(current_pump)
+
+    if is_valid:
+        print(i)
+        break
+
+    deque_stations.append(deque_stations.popleft())
