@@ -1,0 +1,24 @@
+from collections import deque
+
+
+def check_if_balanced(text):
+    symbols = {'{': '}', '(': ')', '[': ']'}
+    stack = []
+    new_deque = deque(text)
+    while new_deque:
+        current_ch = new_deque.popleft()
+        if current_ch in symbols.keys():
+            stack.append(current_ch)
+        elif not stack:
+            return 'NO'
+        elif current_ch not in symbols.keys():
+            ch = stack.pop()
+            if symbols[ch] != current_ch:
+                return 'NO'
+
+    return 'YES'
+
+
+sequence = list(input())
+
+print(check_if_balanced(sequence))
