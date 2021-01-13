@@ -1,0 +1,67 @@
+from collections import deque
+
+
+def nex_seconds(h, m, s):
+    s += 1
+
+    if s == 60:
+        m += 1
+        s = 0
+
+    if m == 60:
+        h += 1
+        s = 0
+        m = 0
+
+    if h == 24:
+        s = 0
+        m = 0
+        h = 0
+
+    return h, m, s
+
+
+robots = deque()
+robots_dict = {}
+waiting_robots = deque()
+products = deque()
+
+data = [x for x in input().split(';')]
+
+for robot in data:
+    rob_info = robot.split('-')
+    robots.append([rob_info[0], int(rob_info[1])])
+    robots_dict[rob_info[0]] = int(rob_info[1])
+
+time = [int(x) for x in input().split(':')]
+
+while True:
+    product = input()
+
+    if product == 'End':
+        break
+
+    products.append(product)
+# print(robots)
+# print(robots_dict)
+# print(waiting_robots)
+while products:
+
+    for robot in waiting_robots:
+        robot_name = robot[0]
+        robot[1] -= 1
+
+        if robot[1] <= 0:
+            robots.append([robot_name, robots_dict[robot_name]])
+
+    waiting_robots = [r for r in waiting_robots if r[1] > 0]
+
+    time = nex_seconds(time[0], time[1], time[2])
+    current_product = products.popleft()
+    if not robots:
+        products.append(current_product)
+        continue
+    current_robot = robots.popleft()
+    print(f'{current_robot[0]} - {current_product} [{time[0]:02d}:{time[1]:02d}:{time[2]:02d}]')
+    waiting_robots.append(current_robot)
+    # print(waiting_robots)
