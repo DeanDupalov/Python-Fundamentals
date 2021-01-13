@@ -1,0 +1,51 @@
+from collections import deque
+
+green_time = int(input())
+
+free_window_time = int(input())
+
+street_deque = deque()
+
+all_passed = True
+all_cars = []
+while True:
+    cars = input()
+
+    if cars == 'END':
+        break
+
+    if cars == 'green':
+        green_timer = green_time
+        if street_deque:
+            car = street_deque.popleft()
+            current_car = deque(car)
+            while green_timer:
+                if not current_car:
+                    if street_deque:
+                        car = street_deque.popleft()
+                        current_car = deque(car)
+                    else:
+                        break
+                current_car.popleft()
+                green_timer -= 1
+
+            if current_car:
+                window_timer = free_window_time
+                while window_timer and current_car:
+                    current_car.popleft()
+                    window_timer -= 1
+
+            if current_car:
+                print("A crash happened!")
+                print(f"{car} was hit at {current_car.popleft()}.")
+                all_passed = False
+                break
+
+    else:
+        street_deque.append(cars)
+        all_cars.append(cars)
+
+count = len(all_cars) - len(street_deque)
+if all_passed:
+    print("Everyone is safe.")
+    print(f"{count} total cars passed the crossroads.")
