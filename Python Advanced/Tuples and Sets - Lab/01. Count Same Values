@@ -1,0 +1,12 @@
+numbers_str = input().split()
+num_dict = {}
+
+for num in numbers_str:
+
+    if num not in num_dict:
+        num_dict[num] = 0
+
+    num_dict[num] += 1
+
+for k, v in num_dict.items():
+    print(f'{float(k)} - {v} times')
