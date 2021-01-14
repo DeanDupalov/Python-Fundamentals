@@ -1,0 +1,38 @@
+from collections import deque
+
+bullet_price = int(input())
+gun_barrel = int(input())
+bullets = [int(b) for b in input().split()]
+locks = deque([int(l) for l in input().split()])
+budget = int(input())
+count_bullets = len(bullets)
+shoot_bullets = 0
+
+while True:
+    if not bullets or not locks:
+        break
+
+    bullet = bullets[-1]
+    lock = locks[0]
+
+    if bullet <= lock:
+        print('Bang!')
+        locks.popleft()
+    else:
+        print('Ping!')
+
+    bullets.pop()
+    shoot_bullets += 1
+
+    if shoot_bullets == gun_barrel and len(bullets) != 0:
+        shoot_bullets = 0
+        print("Reloading!")
+
+count_bullets -= len(bullets)
+cost_bullets = count_bullets * bullet_price
+
+if len(locks) == 0:
+    print(f"{len(bullets)} bullets left. Earned ${budget - cost_bullets}")
+
+else:
+    print(f"Couldn't get through. Locks left: {len(locks)}")
