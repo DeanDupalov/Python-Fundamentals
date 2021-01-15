@@ -1,0 +1,21 @@
+def avg_grade(list_grades):
+    result = sum(list_grades) / len(list_grades)
+    return result
+
+
+lines = int(input())
+
+student_record = {}
+
+for _ in range(lines):
+    name, grade_str = input().split()
+    grade = float(grade_str)
+
+    if name not in student_record:
+        student_record[name] = []
+
+    student_record[name].append(grade)
+
+for k, v in student_record.items():
+    grades = ' '.join(f'{x:.2f}'for x in v)
+    print(f'{k} -> {grades} (avg: {avg_grade(v):.2f})')
