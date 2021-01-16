@@ -1,28 +1,39 @@
 count_guest = int(input())
-vip_list = set()
-regular_list = set()
 
-for num in range(count_guest):
-    num_guest = input()
-    if num_guest[0].isdigit():
-        vip_list.add(num_guest)
-        continue
 
-    regular_list.add(num_guest)
+def get_vip_and_regular_guest_lists(all_guests):
+    vip_list = set()
+    regular_list = set()
 
-vip = set()
-regular = set()
+    for num in range(count_guest):
+        num_guest = input()
+        if num_guest[0].isdigit():
+            vip_list.add(num_guest)
+            continue
 
-while True:
-    next_guest = input()
-    if next_guest == 'END':
-        break
+        regular_list.add(num_guest)
+    return [vip_list, regular_list]
 
-    if next_guest[0].isdigit():
-        vip.add(next_guest)
-        continue
 
-    regular.add(next_guest)
+def check_who_is_at_the_party():
+    vip = set()
+    regular = set()
+
+    while True:
+        next_guest = input()
+        if next_guest == 'END':
+            break
+
+        if next_guest[0].isdigit():
+            vip.add(next_guest)
+            continue
+
+        regular.add(next_guest)
+    return vip, regular
+
+
+vip_list, regular_list = get_vip_and_regular_guest_lists(count_guest)
+vip, regular = check_who_is_at_the_party()
 
 missing_vip = vip_list.difference(vip)
 missing_reg = regular_list.difference(regular)
@@ -32,3 +43,4 @@ sorted_vip = sorted(list(missing_vip))
 sorted_reg = sorted(list(missing_reg))
 [print(g) for g in sorted_vip]
 [print(r) for r in sorted_reg]
+
