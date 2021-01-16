@@ -1,0 +1,34 @@
+count_guest = int(input())
+vip_list = set()
+regular_list = set()
+
+for num in range(count_guest):
+    num_guest = input()
+    if num_guest[0].isdigit():
+        vip_list.add(num_guest)
+        continue
+
+    regular_list.add(num_guest)
+
+vip = set()
+regular = set()
+
+while True:
+    next_guest = input()
+    if next_guest == 'END':
+        break
+
+    if next_guest[0].isdigit():
+        vip.add(next_guest)
+        continue
+
+    regular.add(next_guest)
+
+missing_vip = vip_list.difference(vip)
+missing_reg = regular_list.difference(regular)
+
+print(len(missing_vip) + len(missing_reg))
+sorted_vip = sorted(list(missing_vip))
+sorted_reg = sorted(list(missing_reg))
+[print(g) for g in sorted_vip]
+[print(r) for r in sorted_reg]
