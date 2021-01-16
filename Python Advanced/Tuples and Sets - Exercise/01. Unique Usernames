@@ -1,0 +1,11 @@
+def return_unique_names(count_names):
+    result = set()
+    for name in range(count_names):
+        result.add(input())
+
+    return result
+
+
+count = int(input())
+unique_names = return_unique_names(count)
+[print(name) for name in unique_names]
