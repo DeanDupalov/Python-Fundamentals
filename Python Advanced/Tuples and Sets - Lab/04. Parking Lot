@@ -1,0 +1,19 @@
+lines = int(input())
+parking_lot = set()
+
+for _ in range(lines):
+
+    args = input().split(", ")
+    command, car_number = args[0], args[1]
+
+    if command == 'IN':
+        parking_lot.add(car_number)
+
+    else:
+        parking_lot.remove(car_number)
+
+if not parking_lot:
+    print('Parking Lot is Empty')
+else:
+    for plate in parking_lot:
+        print(plate)
