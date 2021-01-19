@@ -1,0 +1,12 @@
+text = input()
+ch_count = {}
+
+for ch in text:
+    if ch not in ch_count:
+        ch_count[ch] = 0
+
+    ch_count[ch] += 1
+
+ch_count = dict(sorted(ch_count.items(), key= lambda el: el[0]))
+for k, v in ch_count.items():
+    print(f'{k}: {v} time/s')
