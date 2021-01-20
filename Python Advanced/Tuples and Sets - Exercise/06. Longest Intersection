@@ -1,0 +1,15 @@
+lines = int(input())
+longest_intersection = set()
+length = 0
+for _ in range(lines):
+    args = input().split('-')
+    first_range = [int(x) for x in args[0].split(',')]
+    second_range = [int(u) for u in args[1].split(',')]
+    set_one = set([num for num in range(first_range[0], first_range[1]+1)])
+    set_two = set([n for n in range(second_range[0], second_range[1]+1)])
+    set_intersection = set_one.intersection(set_two)
+    if len(set_intersection) > len(longest_intersection):
+        longest_intersection = set_intersection
+        length = len(set_intersection)
+
+print(f'Longest intersection is {[j for j in longest_intersection]} with length {length}')
