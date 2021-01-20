@@ -1,0 +1,23 @@
+phone_book = {}
+n_lines = 0
+while True:
+    info = input()
+
+    if info.isdigit():
+        n_lines = int(info)
+        break
+
+    args = info.split('-')
+    name, phone_number = args[0], args[1]
+
+    if name not in phone_book:
+        phone_book[name] = ''
+
+    phone_book[name] = phone_number
+
+for _ in range(n_lines):
+    name = input()
+    if name not in phone_book:
+        print(f"Contact {name} does not exist.")
+    else:
+        print(f"{name} -> {phone_book[name]}")
