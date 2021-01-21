@@ -1,0 +1,15 @@
+count_rows, count_columns = [int(_) for _ in input().split(', ')]
+
+matrix = []
+
+for i in range(count_rows):
+    rows_list = [int(_)for _ in input().split()]
+    matrix.append(rows_list)
+
+columns_sum = [0] * count_columns
+
+for row in range(count_rows):
+    for column in range(count_columns):
+        columns_sum[column] += matrix[row][column]
+
+[print(x) for x in columns_sum]
