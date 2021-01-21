@@ -1,0 +1,15 @@
+n = int(input())
+
+matrix = []
+
+for row in range(n):
+    matrix.append([int(_) for _ in input().split()])
+
+primary_sum = 0
+
+for row in range(n):
+    for column in range(n):
+        if row == column:
+            primary_sum += matrix[row][column]
+
+print(primary_sum)
