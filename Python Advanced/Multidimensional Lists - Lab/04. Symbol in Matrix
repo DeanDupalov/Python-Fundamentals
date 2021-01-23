@@ -1,0 +1,16 @@
+def find_symbol_in_matrix(matrix, symbol):
+    n = len(matrix)
+    for row in range(n):
+        for col in range(n):
+            if matrix[row][col] == symbol:
+                return f"({row}, {col})"
+
+    return f"{symbol} does not occur in the matrix"
+
+
+m = int(input())
+matrix = [list(input()) for _ in range(m)]
+
+symbol = input()
+
+print(find_symbol_in_matrix(matrix, symbol))
