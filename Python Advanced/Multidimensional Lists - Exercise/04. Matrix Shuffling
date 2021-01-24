@@ -1,0 +1,49 @@
+def read_str_list_from_input(separator=' '):
+    return [x for x in input().split(separator)]
+
+
+def read_int_list_from_input(separator=' '):
+    return [int(x) for x in input().split(separator)]
+
+
+def print_matrix(matrix, row, col):
+    for r in range(row):
+        for c in range(col):
+            print(matrix[r][c], end=' ')
+        print()
+
+
+rows_count, columns_count = read_int_list_from_input()
+
+matrix = [read_str_list_from_input() for _ in range(rows_count)]
+# swap row1 col1 row2 col2
+while True:
+    data = input()
+
+    if data == 'END':
+        break
+
+    args = data.split()
+    command = args[0]
+
+    if command == 'swap':
+        if len(args) != 5:
+            print('Invalid input!')
+            continue
+
+        row_1 = int(args[1])
+        col_1 = int(args[2])
+        row_2 = int(args[3])
+        col_2 = int(args[4])
+
+        if (0 <= row_1 < rows_count and 0 <= col_1 < columns_count) and (
+                0 <= row_2 < rows_count and 0 <= col_2 < columns_count):
+            first_num = matrix[row_1][col_1]
+            matrix[row_1][col_1] = matrix[row_2][col_2]
+            matrix[row_2][col_2] = first_num
+            print_matrix(matrix, rows_count, columns_count)
+        else:
+            print('Invalid input!')
+    else:
+        print('Invalid input!')
+
