@@ -1,0 +1,36 @@
+def get_sum_sub_matrix(r, c, multi_list):
+    result = multi_list[r][c] + multi_list[r][c + 1] + multi_list[r][c + 2] + multi_list[r + 1][c] \
+             + multi_list[r + 1][c + 1] + multi_list[r + 1][c + 2] + multi_list[r + 2][c] + multi_list[r + 2][c + 1] + \
+             multi_list[r + 2][c + 2]
+    return result
+
+
+def get_sub_matrix_indexes_and_sum(multi_list, size):
+    sub_sum = 0
+    row_idx, col_idx = 0, 0
+
+    for r in range(0, len(multi_list) - size + 1):
+        for c in range(0, len(multi_list[r]) - size + 1):
+            sum_result = get_sum_sub_matrix(r, c, multi_list)
+            if sum_result > sub_sum:
+                sub_sum = sum_result
+                row_idx, col_idx = r, c
+
+    return (sub_sum, row_idx, col_idx)
+
+
+def print_sub_matrix(r_i, c_i, multi_list, size):
+    row = []
+    for r in range(r_i, row_idx + size):
+        for c in range(c_i, c_i + size):
+            row.append(multi_list[r][c])
+        print(' '.join(map(str, row)))
+        row.clear()
+
+
+SUB_MATRIX_SIZE = 3
+n, m = [int(x) for x in input().split()]
+rectangular_matrix = [[int(x) for x in input().split()] for r in range(n)]
+biggest_sum, row_idx, col_idx = get_sub_matrix_indexes_and_sum(rectangular_matrix, SUB_MATRIX_SIZE)
+print(f"Sum = {biggest_sum}")
+print_sub_matrix(row_idx, col_idx, rectangular_matrix, SUB_MATRIX_SIZE)
