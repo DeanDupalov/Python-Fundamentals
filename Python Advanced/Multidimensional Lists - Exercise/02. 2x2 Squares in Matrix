@@ -1,0 +1,25 @@
+def read_int_list_from_input(separator=' '):
+    return [int(x) for x in input().split(separator)]
+
+
+def get_equal_symbol(matrix, row, col):
+    equal_cells_count = 0
+    if matrix[row][col] == matrix[row][col + 1] and matrix[row][col] == matrix[row + 1][col] and \
+            matrix[row][col] == matrix[row + 1][col + 1]:
+        equal_cells_count += 1
+    return equal_cells_count
+
+(rows_count, column_count) = read_int_list_from_input()
+size = 2
+two_d_list = []
+
+for _ in range(rows_count):
+    two_d_list.append(input().split())
+
+start_index = (0, 0)
+equal_count = 0
+for row in range(len(two_d_list) - 1):
+    for col in range(len(two_d_list[row]) - 1):
+        equal_count += get_equal_symbol(two_d_list, row, col)
+
+print(equal_count)
