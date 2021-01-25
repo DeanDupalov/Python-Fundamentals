@@ -1,0 +1,42 @@
+def is_valid(row, col, size):
+    return 0 <= row < size and 0 <= col < size
+
+
+def explode(row, col, size, matrix):
+    bomb = matrix[row][col]
+    for r in range(row - 1, row + 2):
+        for c in range(col - 1, col + 2):
+            if is_valid(r, c, size) and matrix[r][c] > 0:
+                matrix[r][c] -= bomb
+
+
+n = int(input())
+matrix = []
+
+for _ in range(n):
+    line = [int(x) for x in input().split()]
+    matrix.append(line)
+
+bombs = input().split()
+
+for bomb in bombs:
+    tokens = [int(x) for x in bomb.split(',')]
+    bomb_row = tokens[0]
+    bomb_col = tokens[1]
+
+    if matrix[bomb_row][bomb_col] > 0:
+        explode(bomb_row, bomb_col, n, matrix)
+        matrix[bomb_row][bomb_col] = 0
+plus_cells = 0
+sum_cells = 0
+for r in range(n):
+    for c in range(n):
+        if matrix[r][c] > 0:
+            sum_cells += matrix[r][c]
+            plus_cells += 1
+
+
+print(f'Alive cells: {plus_cells}')
+print(f'Sum: {sum_cells}')
+for row in matrix:
+    print(' '.join(map(str, row)))
