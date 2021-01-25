@@ -1,0 +1,44 @@
+def is_valid(size, position):
+    row, col = position
+    return 0 <= row < size and 0 <= col < size
+
+
+def get_knight_kills(matrix, row, col, size):
+    count_kills = 0
+    k_rows = [-2, -1, 1, 2, 2, 1, -1, -2]
+    k_cols = [1, 2, 2, 1, -1, -2, -2, -1]
+
+    for i in range(8):
+        hit_current_position = [row + k_rows[i], col + k_cols[i]]
+        if is_valid(size, hit_current_position) and board[hit_current_position[0]][hit_current_position[1]] == 'K':
+            count_kills += 1
+    return count_kills
+
+
+n = int(input())
+
+board = []
+knights_removed = 0
+
+for _ in range(n):
+    board.append([x for x in input()])
+
+while True:
+    knight_pos_to_kill = (0, 0)
+    most_kills = 0
+
+    for row in range(n):
+        for col in range(n):
+            if board[row][col] == 'K':
+                current_kills = get_knight_kills(board, row, col, n)
+                if current_kills > most_kills:
+                    most_kills = current_kills
+                    knight_pos_to_kill = (row, col)
+
+    if most_kills == 0:
+        break
+    r, c = knight_pos_to_kill
+    board[r][c] = '0'
+    knights_removed += 1
+
+print(knights_removed)
