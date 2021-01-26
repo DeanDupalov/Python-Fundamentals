@@ -1,0 +1,97 @@
+def is_valid(row, col, size):
+    return 0 <= row < size and 0 <= col < size
+
+
+n = int(input())
+commands = input().split()
+
+field = [input().split() for _ in range(n)]
+
+total_coal = 0
+mined_coal = 0
+miner_poss = (0, 0)
+exit_poss = (0, 0)
+is_end = False
+
+for r in range(n):
+    for c in range(n):
+        if field[r][c] == 'c':
+            total_coal += 1
+        elif field[r][c] == 's':
+            miner_poss = r, c
+        elif field[r][c] == 'e':
+            exit_poss = r, c
+while total_coal > mined_coal:
+    for command in commands:
+        if command == 'up':
+            if is_valid(miner_poss[0] - 1, miner_poss[1], n):
+                next_ciel = field[miner_poss[0] - 1][miner_poss[1]]
+                if next_ciel == 'c':
+                    mined_coal += 1
+                    field[miner_poss[0] - 1][miner_poss[1]] = '*'
+                    miner_poss = miner_poss[0] - 1, miner_poss[1]
+
+                elif next_ciel == 'e':
+                    print(f"Game over! ({miner_poss[0] - 1}, {miner_poss[1]})")
+                    is_end = True
+                    break
+                elif next_ciel == '*':
+                    miner_poss = miner_poss[0] - 1, miner_poss[1]
+            else:
+                continue
+        elif command == 'down':
+            if is_valid(miner_poss[0] + 1, miner_poss[1], n):
+                next_ciel = field[miner_poss[0] + 1][miner_poss[1]]
+                if next_ciel == 'c':
+                    mined_coal += 1
+                    field[miner_poss[0] + 1][miner_poss[1]] = '*'
+                    miner_poss = miner_poss[0] + 1, miner_poss[1]
+
+                elif next_ciel == 'e':
+                    print(f"Game over! ({miner_poss[0] + 1}, {miner_poss[1]})")
+                    is_end = True
+                    break
+                elif next_ciel == '*':
+                    miner_poss = miner_poss[0] + 1, miner_poss[1]
+            else:
+                continue
+        elif command == 'right':
+            if is_valid(miner_poss[0], miner_poss[1] + 1, n):
+                next_ciel = field[miner_poss[0]][miner_poss[1] + 1]
+                if next_ciel == 'c':
+                    mined_coal += 1
+                    field[miner_poss[0]][miner_poss[1] + 1] = '*'
+                    miner_poss = miner_poss[0], miner_poss[1] + 1
+
+                elif next_ciel == 'e':
+                    print(f"Game over! ({miner_poss[0]}, {miner_poss[1] + 1})")
+                    is_end = True
+                    break
+                elif next_ciel == '*':
+                    miner_poss = miner_poss[0], miner_poss[1] + 1
+            else:
+                continue
+        elif command == 'left':
+            if is_valid(miner_poss[0], miner_poss[1] - 1, n):
+                next_ciel = field[miner_poss[0]][miner_poss[1] - 1]
+                if next_ciel == 'c':
+                    mined_coal += 1
+                    field[miner_poss[0]][miner_poss[1] - 1] = '*'
+                    miner_poss = miner_poss[0], miner_poss[1] - 1
+
+                elif next_ciel == 'e':
+                    print(f"Game over! ({miner_poss[0]}, {miner_poss[1] - 1})")
+                    is_end = True
+                    break
+                elif next_ciel == '*':
+                    miner_poss = miner_poss[0], miner_poss[1] - 1
+            else:
+                continue
+    if is_end:
+        break
+    if total_coal > mined_coal:
+        left_coals = total_coal - mined_coal
+        print(f"{left_coals} coals left. ({miner_poss[0]}, {miner_poss[1]})")
+        break
+else:
+    print(f"You collected all coals! ({miner_poss[0]}, {miner_poss[1]})")
