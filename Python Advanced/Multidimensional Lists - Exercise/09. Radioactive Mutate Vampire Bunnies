@@ -1,0 +1,127 @@
+def is_valid_next_move(r, c, matrix):
+    return 0 <= r < len(matrix) and 0 <= c < len(matrix[0])
+
+
+def is_player_dead(r, c, matrix):
+    if matrix[r][c] == 'P':
+        return True
+    else:
+        return False
+
+
+def get_bunnies_position(r, c, matrix):
+    bunnies = []
+    for r in range(len(matrix)):
+        for c in range(len(matrix[r])):
+            if matrix[r][c] == 'B':
+                position = [r, c]
+                bunnies.append(position)
+    return bunnies
+
+
+def get_player_position(r, c, matrix):
+    player_poss = []
+    for r in range(len(matrix)):
+        for c in range(len(matrix[r])):
+            if matrix[r][c] == 'P':
+                player_poss = r, c
+    return player_poss
+
+
+def is_not_bunny(r, c, matrix):
+    if matrix[r][c] != 'B':
+        return True
+    else:
+        return False
+
+
+def is_exit(r, c, matrix):
+    if 0 <= r < len(matrix) and 0 <= c < len(matrix[0]):
+        return False
+    else:
+        return True
+
+
+rows_count, cols_count = [int(x) for x in input().split()]
+
+matrix = []
+
+for _ in range(rows_count):
+    line = list(input())
+    matrix.append(line)
+
+commands = list(input())
+
+player_poss = get_player_position(0, 0, matrix)
+bunnies_poss = get_bunnies_position(0, 0, matrix)
+dead_poss = []
+is_you_won = False
+step_into_bunny = False
+dead_by_bunny = False
+
+for command in commands:
+    next_player_poss = []
+    if command == 'U':
+        next_player_poss = [player_poss[0] - 1, player_poss[1]]
+    elif command == 'D':
+        next_player_poss = [player_poss[0] + 1, player_poss[1]]
+    elif command == 'L':
+        next_player_poss = [player_poss[0], player_poss[1] - 1]
+    elif command == 'R':
+        next_player_poss = [player_poss[0], player_poss[1] + 1]
+
+    # check indices
+    if is_valid_next_move(next_player_poss[0], next_player_poss[1], matrix):
+        row = next_player_poss[0]
+        col = next_player_poss[1]
+
+        if matrix[row][col] == '.':
+            matrix[player_poss[0]][player_poss[1]] = '.'
+            matrix[row][col] = 'P'
+            player_poss = [row, col]
+        elif matrix[row][col] == 'B':
+            matrix[player_poss[0]][player_poss[1]] = 'B'
+            step_into_bunny = True
+            dead_poss = [row, col]
+
+    elif is_exit(next_player_poss[0], next_player_poss[1], matrix):
+        matrix[player_poss[0]][player_poss[1]] = '.'
+        is_you_won = True
+
+    for poss in bunnies_poss:
+        r, c = poss
+
+        if matrix[r][c] == 'B':
+            if is_valid_next_move(r - 1, c, matrix) and matrix[r - 1][c] != 'B':
+                dead_by_bunny = is_player_dead(r - 1, c, matrix)
+                matrix[r - 1][c] = 'B'
+
+            if is_valid_next_move(r + 1, c, matrix) and matrix[r + 1][c] != 'B':
+                dead_by_bunny = is_player_dead(r + 1, c, matrix)
+                matrix[r + 1][c] = 'B'
+
+            if is_valid_next_move(r, c - 1, matrix) and matrix[r][c - 1] != 'B':
+                dead_by_bunny = is_player_dead(r, c - 1, matrix)
+                matrix[r][c - 1] = 'B'
+
+            if is_valid_next_move(r, c + 1, matrix) and matrix[r][c + 1] != 'B':
+                dead_by_bunny = is_player_dead(r, c + 1, matrix)
+                matrix[r][c + 1] = 'B'
+
+    bunnies_poss = get_bunnies_position(0, 0, matrix)
+
+    if step_into_bunny:
+        break
+
+    if dead_by_bunny:
+        break
+
+for row in matrix:
+    print("".join(map(str, row)))
+
+if is_you_won:
+    print(f"won: {player_poss[0]} {player_poss[1]}")
+elif dead_by_bunny:
+    print(f"dead: {player_poss[0]} {player_poss[1]}")
+elif step_into_bunny:
+    print(f"dead: {dead_poss[0]} {dead_poss[1]}")
