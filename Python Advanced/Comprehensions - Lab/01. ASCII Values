@@ -1,0 +1,5 @@
+chars = input().split(', ')
+
+dict_chars = {ch: ord(ch) for ch in chars}
+
+print(dict_chars)
