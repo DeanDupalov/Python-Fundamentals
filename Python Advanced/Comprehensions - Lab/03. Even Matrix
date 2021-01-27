@@ -1,0 +1,15 @@
+def read_matrix(size):
+    matrix = [[int(x) for x in input().split(',')] for row in range(size)]
+    return matrix
+
+
+def get_even_number(list):
+    even_list = [num for num in list if num % 2 == 0]
+    return even_list
+
+
+n = int(input())
+matrix = read_matrix(n)
+
+even_matrix = [get_even_number(r) for r in matrix]
+print(even_matrix)
