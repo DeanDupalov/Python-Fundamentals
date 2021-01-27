@@ -1,0 +1,11 @@
+def read_matrix(size, separator=' '):
+    matrix = [[int(x) for x in input().split(separator)] for _ in range(size)]
+    return matrix
+
+
+n = int(input())
+
+matrix = read_matrix(n, ', ')
+
+flatted_matrix = [num for row in matrix for num in row]
+print(flatted_matrix)
