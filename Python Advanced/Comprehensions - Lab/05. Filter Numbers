@@ -1,0 +1,9 @@
+def is_valid(number):
+    return any([number % d == 0 for d in range(2, 11)])
+
+
+start = int(input())
+end = int(input())
+
+result = [n for n in range(start, end + 1) if is_valid(n)]
+print(result)
