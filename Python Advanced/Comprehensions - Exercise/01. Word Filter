@@ -1,0 +1,5 @@
+def is_even_length(word):
+    return len(word) % 2 == 0
+
+
+[print(word) for word in input().split() if is_even_length(word)]
