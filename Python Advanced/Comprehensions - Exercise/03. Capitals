@@ -1,0 +1,6 @@
+countries = input().split(', ')
+capitals = input().split(', ')
+
+dict_countries_capitals = {country: capitals[i] for i, country in enumerate(countries)}
+
+[print(f"{k} -> {v}") for k,v in dict_countries_capitals.items()]
