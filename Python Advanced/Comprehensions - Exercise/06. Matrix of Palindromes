@@ -1,0 +1,5 @@
+rows_count, cols_count = [int(x) for x in input().split()]
+
+matrix = [[f"{chr(r)}{chr(r + c)}{chr(r)}" for c in range(cols_count)] for r in range(97, 97 + rows_count)]
+
+[print(' '.join(row)) for row in matrix]
