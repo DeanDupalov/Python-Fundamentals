@@ -1,0 +1,11 @@
+def read_matrix_input(size):
+    return [[int(x) for x in input().split(', ')] for row in range(size)]
+
+
+n = int(input())
+
+matrix = read_matrix_input(n)
+first_diagonal_numbers = [matrix[i][i] for i in range(n)]
+second_diagonal_numbers = [matrix[i][n - i - 1]for i in range(n)]
+print(f'First diagonal: {", ".join(map(str, first_diagonal_numbers))}. Sum: {sum(first_diagonal_numbers)}')
+print(f'Second diagonal: {", ".join(map(str, second_diagonal_numbers))}. Sum: {sum(second_diagonal_numbers)}')
