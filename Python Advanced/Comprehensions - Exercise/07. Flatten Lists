@@ -1,0 +1,3 @@
+numbers = [l.split() for l in input().split('|')]
+numbers_str = [str(num) for i in range(len(numbers) - 1, -1, -1) for num in numbers[i]]
+print(' '.join(numbers_str))
