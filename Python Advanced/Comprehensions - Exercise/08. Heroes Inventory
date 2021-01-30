@@ -1,0 +1,16 @@
+heroes_dict = {h: {} for h in input().split(', ')}
+
+while True:
+    data = input()
+    if data == 'End':
+        break
+
+    name, item, price = data.split('-')
+    if item not in heroes_dict[name]:
+        heroes_dict[name][item] = {}
+    else:
+        continue
+    heroes_dict[name][item] = int(price)
+
+for key, value in heroes_dict.items():
+    print(f'{key} -> Items: {len(value)}, Cost: {sum([v for k,v in value.items()])}')
