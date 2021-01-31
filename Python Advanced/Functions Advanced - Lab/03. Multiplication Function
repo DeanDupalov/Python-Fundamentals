@@ -1,0 +1,9 @@
+def multiply(*args):
+    result = 1
+    for n in args:
+        result *= n
+
+    return result
+
+
+print(multiply(4, 5, 6, 1, 3))
