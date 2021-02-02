@@ -1,0 +1,20 @@
+def get_sum_positive_numbers(nums):
+    result = list(filter(lambda n: n >= 0, nums))
+    return sum(result)
+
+
+def get_sum_negative_numbers(nums):
+    result = list(filter(lambda n: n < 0, nums))
+    return sum(result)
+
+
+numbers = [int(x) for x in input().split()]
+
+positive_sum = get_sum_positive_numbers(numbers)
+negative_sum = get_sum_negative_numbers(numbers)
+print(negative_sum)
+print(positive_sum)
+if positive_sum > abs(negative_sum):
+    print("The positives are stronger than the negatives")
+else:
+    print("The negatives are stronger than the positives")
