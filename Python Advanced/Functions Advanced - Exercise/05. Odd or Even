@@ -1,0 +1,19 @@
+def get_sum_even_numbers(nums):
+    result = list(filter(lambda n: n % 2 == 0, nums))
+    return sum(result)
+
+
+def get_sum_odd_numbers(nums):
+    result = list(filter(lambda n: n % 2 != 0, nums))
+    return sum(result)
+
+
+command = input()
+numbers = [int(x) for x in input().split()]
+
+if command == 'Odd':
+    odd_sum = get_sum_odd_numbers(numbers)
+    print(odd_sum * len(numbers))
+elif command == 'Even':
+    even_sum = get_sum_even_numbers(numbers)
+    print(even_sum * len(numbers))
