@@ -1,0 +1,9 @@
+def even_odd(*args):
+    nums = list(args)
+    command = nums.pop()
+    if command == 'even':
+        result = filter(lambda x: x % 2 == 0, nums)
+        return list(result)
+    elif command == 'odd':
+        result = filter(lambda x: x % 2 != 0, nums)
+        return list(result)
