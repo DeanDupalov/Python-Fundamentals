@@ -1,0 +1,13 @@
+def age_assignment(*args, **kwargs):
+    dict_info = {}
+
+    for name in args:
+        if name not in dict_info:
+            age = kwargs[name[0]]
+            dict_info[name] = age
+
+    return dict_info
+
+
+print(age_assignment("Peter", "George", G=26, P=19))
+print(age_assignment("Amy", "Bill", "Willy", W=36, A=22, B=61))
