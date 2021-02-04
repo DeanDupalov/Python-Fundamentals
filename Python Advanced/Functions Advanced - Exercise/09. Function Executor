@@ -1,0 +1,19 @@
+def sum_numbers(num1, num2):
+    return num1 + num2
+
+
+def multiply_numbers(num1, num2):
+    return num1 * num2
+
+
+def func_executor(*args):
+    result = []
+    for pair in args:
+        function = pair[0]
+        result_sub_func = function(*pair[1])
+        result.append(result_sub_func)
+
+    return result
+
+
+print(func_executor((sum_numbers, (1, 2)), (multiply_numbers, (2, 4))))
