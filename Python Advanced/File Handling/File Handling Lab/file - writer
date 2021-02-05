@@ -1,0 +1,11 @@
+import os
+
+file_path = "numbers.txt"
+if os.path.exists(file_path):
+    os.remove(file_path)
+
+
+try:
+    os.remove('my_first_file.txt')
+except FileNotFoundError:
+    print("File already deleted!")
