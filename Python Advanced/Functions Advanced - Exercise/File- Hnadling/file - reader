@@ -1,3 +1,0 @@
-with open('numbers.txt', 'r') as file:
-
-    print(sum([int(n) for n in file]))
