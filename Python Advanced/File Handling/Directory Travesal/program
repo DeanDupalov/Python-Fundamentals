@@ -1,0 +1,29 @@
+import os
+
+path = input()
+sep_count = path.count(os.path.sep)
+file_dict = {}
+for root, dirs, files in os.walk(path):
+    if sep_count - root.count(os.path.sep) > 1:
+        continue
+
+    for file in files:
+        extensions = file.split('.')[-1]
+
+        if extensions not in file_dict:
+            file_dict[extensions] = []
+        file_dict[extensions].append(file)
+
+result_str = ''
+file_dict = dict(sorted(file_dict.items(), key=lambda el: el))
+for k, v in file_dict.items():
+    result_str += f".{k}\n"
+    v.sort()
+    for el in v:
+        result_str += f"- - - {el}\n"
+
+desktop = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+final_path = desktop + os.path.sep + 'report.txt'
+
+with open(final_path, "w") as file:
+    file.write(result_str)
