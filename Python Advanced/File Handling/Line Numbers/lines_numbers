@@ -1,0 +1,14 @@
+with open('text.txt', 'r') as file:
+    result_str = ''
+    for i, line in enumerate(file):
+        ch_count = 0
+        symbol_count = 0
+        for ch in line:
+            if ch.isalpha():
+                ch_count += 1
+            elif ch in "-,.!?'":
+                symbol_count += 1
+        result_str += f"Line {i + 1}: c{line.strip()} ({ch_count})({symbol_count})\n"
+        
+with open('output.txt', 'w') as file:
+    file.write(result_str)
