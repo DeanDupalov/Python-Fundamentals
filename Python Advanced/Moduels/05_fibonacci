@@ -1,0 +1,16 @@
+from Mathematical_operations_pack.fibonacci import create_fibonacci_sequence, locate_num_in_sequence
+
+while True:
+    args = input().split()
+    command = args[0]
+    if command == 'Stop':
+        break
+
+    if command == 'Create':
+        number = int(args[2])
+
+        create_fibonacci_sequence(number)
+
+    elif command == 'Locate':
+        number = int(args[1])
+        locate_num_in_sequence(number)
