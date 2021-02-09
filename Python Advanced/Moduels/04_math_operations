@@ -1,0 +1,6 @@
+from Mathematical_operations_pack.operations import operation_result
+
+(num, operator, num_two) = input().split()
+
+result = operation_result(float(num), int(num_two), operator)
+print(f'{result:.2f}')
