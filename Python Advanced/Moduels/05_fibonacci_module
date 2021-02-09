@@ -1,0 +1,22 @@
+def create_fibonacci_sequence(n):
+    sequence = [0, 1]
+    for i in range(2, n):
+        sequence.append(sequence[i - 2] + sequence[i - 1])
+
+    print(' '.join([str(num) for num in sequence]))
+
+
+def locate_num_in_sequence(num):
+    if num == 0:
+        print(0)
+        return
+    x, y = 0, 1
+    count = 0
+    while x < num:
+        x, y = y, x + y
+        count += 1
+    if x == num:
+        print(f"The number - {num} is at index {count}")
+    else:
+        print(f"The number {num} is not in the sequence")
+
