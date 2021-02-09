@@ -1,0 +1,28 @@
+from math import pow
+def sum_op(x, y):
+    return x + y
+
+
+def subtract_op(x, y):
+    return x - y
+
+
+def multiply_op(x, y):
+    return x * y
+
+
+def division_op(x, y):
+    return x / y
+
+
+def operation_result(num, num_two, operator):
+    if operator == '+':
+        return sum_op(num, num_two)
+    elif operator == '-':
+        return subtract_op(num, num_two)
+    elif operator == '*':
+        return multiply_op(num, num_two)
+    elif operator == '/':
+        return division_op(num, num_two)
+    elif operator == '^':
+        return pow(num, num_two)
