@@ -1,0 +1,59 @@
+from collections import deque
+
+
+def get_colors_out_of_string(string_deque, m_colors, sec_colors):
+    colors = []
+
+    while string_deque:
+        if len(string_deque) < 2:
+            string_deque.append('')
+        sub_str_left = string_deque.popleft()
+        sub_str_right = string_deque.pop()
+
+        combination_one = sub_str_left + sub_str_right
+        combination_two = sub_str_right + sub_str_left
+
+        if combination_one in main_colors or combination_one in secondary_colors:
+            colors.append(combination_one)
+
+        elif combination_two in main_colors or combination_two in secondary_colors:
+            colors.append(combination_two)
+
+        else:
+            if sub_str_left[:len(sub_str_left) - 1] != '':
+                string_deque.insert(len(string_deque) // 2, sub_str_left[:len(sub_str_left) - 1])
+            if sub_str_right[:len(sub_str_right) - 1] != '':
+                string_deque.insert(len(string_deque) // 2, sub_str_right[:len(sub_str_right) - 1])
+
+    return colors
+
+
+def check_secondary_colors(list_colors):
+    if 'orange' in list_colors:
+        if 'red' in list_colors and 'yellow' in list_colors:
+            pass
+        else:
+            list_colors.remove('orange')
+    elif 'purple' in list_colors:
+        if 'red' in list_colors and 'blue' in list_colors:
+            pass
+        else:
+            list_colors.remove('purple')
+
+    elif 'green' in list_colors:
+        if 'yellow' in list_colors and 'blue' in list_colors:
+            pass
+        else:
+            list_colors.remove('green')
+    return list_colors
+
+
+text = input().split()
+st_deque = deque(text)
+
+main_colors = ["red", "yellow", "blue"]
+secondary_colors = ["orange", "purple", "green"]
+my_colors = get_colors_out_of_string(st_deque, main_colors, secondary_colors)
+final_list = check_secondary_colors(my_colors)
+
+print(final_list)
