@@ -1,0 +1,60 @@
+from collections import deque
+
+
+def read_int_list():
+    return [int(x) for x in input().split(', ')]
+
+
+
+bombs_info = {
+    40: 'Datura Bombs',
+    60: 'Cherry Bombs',
+    120: 'Smoke Decoy Bombs',
+}
+bombs_pouch = {
+    'Datura Bombs': 0,
+    'Cherry Bombs': 0,
+    'Smoke Decoy Bombs': 0,
+}
+full_pouch = False
+effects = deque(read_int_list())
+casings = read_int_list()
+
+while effects and casings:
+    current_effect = effects[0]
+    current_casings = casings[-1]
+
+    mix_value = current_effect + current_casings
+
+    if mix_value in bombs_info:
+        bomb = bombs_info[mix_value]
+        bombs_pouch[bomb] += 1
+        effects.popleft()
+        casings.pop()
+        if bombs_pouch['Datura Bombs'] >= 3 and bombs_pouch['Cherry Bombs'] >= 3 \
+                and bombs_pouch['Smoke Decoy Bombs'] >= 3:
+            full_pouch = True
+            break
+        continue
+
+    casings[-1] -= 5
+
+if full_pouch:
+    print("Bene! You have successfully filled the bomb pouch!")
+else:
+    print("You don't have enough materials to fill the bomb pouch.")
+
+if effects:
+    print(f"Bomb Effects: {', '.join(map(str, effects))}")
+else:
+    print("Bomb Effects: empty")
+
+if casings:
+    print(f"Bomb Casings: {', '.join(map(str, casings))}")
+else:
+    print("Bomb Casings: empty")
+
+
+
+for b, v in sorted(bombs_pouch.items()):
+    print(f"{b}: {v}")
