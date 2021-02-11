@@ -1,0 +1,51 @@
+from math import floor
+from collections import deque
+
+
+def return_operator_result(symbol, nums_list):
+    if symbol == "*":
+        result = 1
+        for n in nums_list:
+            result *= n
+        return result
+    elif symbol == "+":
+        return sum(nums_list)
+    elif symbol == "-":
+        result = nums_list[0]
+        for i in range(1, len(nums_list)):
+            result -= nums_list[i]
+        return result
+    elif symbol == "/":
+        result = nums_list[0]
+        for i in range(1, len(nums_list)):
+            result /= nums_list[i]
+        return floor(result)
+
+
+def check_only_int_in_list(n_list):
+    is_only_int = False
+    for i in range(len(n_list)):
+        if n_list[i].isalpha():
+            return is_only_int
+
+    is_only_int = True
+    return is_only_int
+
+
+text = deque(input().split())
+operators = ["*", "+", "-", "/"]
+
+nums = []
+while True:
+    if all(type(x) == int for x in text):
+        break
+    current_num = text.popleft()
+    if current_num in operators:
+        op_result = return_operator_result(current_num, nums)
+        text.appendleft(op_result)
+        nums = []
+
+    else:
+        nums.append(int(current_num))
+
+print(' '.join([str(x) for x in text]))
