@@ -1,0 +1,117 @@
+def is_valid_move(r, c, multi_list):
+    return 0 <= r < len(multi_list) and 0 <= c < len(multi_list) and multi_list[r][c] != 'X'
+
+
+def get_bunny_position(multi_list):
+    b_pos = (0, 0)
+    for r in range(len(matrix)):
+        for c in range(len(matrix[r])):
+            if matrix[r][c] == 'B':
+                b_pos = r, c
+                break
+
+    return b_pos
+
+
+def check_eggs_up(poss, multi_list):
+    r = poss[0]
+    c = poss[1]
+    up = {}
+
+    for i in range(r - 1, -1, -1):
+        if multi_list[i][c] == 'X':
+            break
+        if multi_list[i][c] not in up:
+            up[multi_list[i][c]] = []
+
+        up[multi_list[i][c]] = [i, c]
+    return up
+
+
+def check_eggs_down(poss, multi_list):
+    r = poss[0]
+    c = poss[1]
+    down = {}
+
+    for i in range(r + 1, len(multi_list)):
+        if multi_list[i][c] == 'X':
+            break
+        if multi_list[i][c] not in down:
+            down[multi_list[i][c]] = []
+
+        down[multi_list[i][c]] = [i, c]
+    return down
+
+
+def check_eggs_left(poss, multi_list):
+    r = poss[0]
+    c = poss[1]
+    left = {}
+    for i in range(c - 1, -1, -1):
+        if multi_list[r][i] == 'X':
+            break
+        if multi_list[r][i] not in left:
+            left[multi_list[r][i]] = []
+
+        left[multi_list[r][i]] = [r, i]
+    return left
+
+
+def check_eggs_right(poss, multi_list):
+    r = poss[0]
+    c = poss[1]
+    right = {}
+    for i in range(c + 1, len(multi_list)):
+        if multi_list[r][i] == 'X':
+            break
+        if multi_list[r][i] not in right:
+            right[multi_list[r][i]] = []
+
+        right[multi_list[r][i]] = [r, i]
+    return right
+
+
+def calculate_dict_sum(dictionary):
+    dict_sum = 0
+    for k in dictionary.keys():
+        dict_sum += int(k)
+
+    return dict_sum
+
+
+def return_the_longest_way(arry):
+    eggs = 0
+    arry_index = 0
+    for sub_dict in arry:
+        sub_sum = calculate_dict_sum(sub_dict)
+        if sub_sum >= eggs:
+            eggs = sub_sum
+            arry_index = arry.index(sub_dict)
+    return (arry_index, eggs)
+
+
+def get_direction_by_index(idx):
+    if idx == 0:
+        print('up')
+    elif idx == 1:
+        print('down')
+    elif idx == 2:
+        print('left')
+    elif idx == 3:
+        print('right')
+
+
+n = int(input())
+
+matrix = [input().split() for r in range(n)]
+
+bunny_position = get_bunny_position(matrix)
+all_directions_list = [check_eggs_up(bunny_position, matrix), check_eggs_down(bunny_position, matrix),
+                       check_eggs_left(bunny_position, matrix), check_eggs_right(bunny_position, matrix)]
+
+(winner_index, total_eggs) = return_the_longest_way(all_directions_list)
+
+get_direction_by_index(winner_index)
+winner_dict = all_directions_list[winner_index]
+[print(v) for k, v in winner_dict.items()]
+print(total_eggs)
