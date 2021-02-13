@@ -1,0 +1,43 @@
+def is_valid(num, n):
+    return 0 <= num < n
+
+
+def get_near_bombs(row, col, multi_list):
+    directions = {"up": (-1, 0), "down": (1, 0), "right": (0, 1), "left": (0, -1), 'top_left': (1, -1),
+                  'bottom_left': (-1, -1), 'top_right': (1, 1), 'bottom_right': (-1, 1)}
+    count = 0
+
+    for k, v in directions.items():
+        next_r = row + v[0]
+        next_c = col + v[1]
+        if is_valid(next_r, size) and is_valid(next_c, size) and multi_list[next_r][next_c] == '*':
+            count += 1
+
+    return count
+
+
+size = int(input())
+bombs_count = int(input())
+
+matrix = [['0'] * size for r in range(size)]
+bombs_pos = []
+
+for i in range(bombs_count):
+    text = input()
+    symbols = ('(', ')')
+    for sym in symbols:
+        text = text.replace(sym, "")
+
+    pos = text.split(', ')
+    bombs_pos.append(pos)
+    row = int(pos[0])
+    col = int(pos[1])
+    matrix[row][col] = '*'
+
+for r in range(size):
+    for c in range(size):
+        if matrix[r][c] != "*":
+            matrix[r][c] = get_near_bombs(r, c, matrix)
+
+
+[print(" ".join(map(str, line)))for line in matrix]
