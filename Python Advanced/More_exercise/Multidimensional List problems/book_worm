@@ -1,0 +1,43 @@
+def is_valid(number, size):
+    return 0 <= number < size
+
+
+text = list(input())
+n = int(input())
+player_pos = []
+matrix = []
+for r in range(n):
+    line = list(input())
+    matrix.append(line)
+    for c in range(n):
+        if matrix[r][c] == 'P':
+            player_pos = [r, c]
+
+m = int(input())
+commands = []
+[commands.append(input()) for i in range(m)]
+
+directions = {"up": (-1, 0), "down": (1, 0), "right": (0, 1), "left": (0, -1)}
+
+for command in commands:
+    row = player_pos[0]
+    col = player_pos[1]
+
+    next_row = row + directions[command][0]
+    next_col = col + directions[command][1]
+
+    if is_valid(next_row, n) and is_valid(next_col, n):
+        if matrix[next_row][next_col] == "-":
+            matrix[row][col] = "-"
+            player_pos = [next_row, next_col]
+            matrix[next_row][next_col] = "P"
+        else:
+            text.append(matrix[next_row][next_col])
+            matrix[row][col] = "-"
+            player_pos = [next_row, next_col]
+            matrix[next_row][next_col] = "P"
+    else:
+        text.pop()
+
+print("".join(text))
+[print("".join(row)) for row in matrix]
