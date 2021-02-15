@@ -1,0 +1,80 @@
+def is_valid(n, size):
+    return 0 <= n < size
+
+
+def get_current_pos(given_dir, r, c, step):
+    pos = [0, 0]
+    if given_dir == 'up':
+        pos = [r - step, c]
+        return pos
+    elif given_dir == 'down':
+        pos = [r + step, c]
+        return pos
+    elif given_dir == 'right':
+        pos = [r, c + step]
+        return pos
+    elif given_dir == 'left':
+        pos = [r, c - step]
+        return pos
+
+
+n = int(input())
+targets_pos = []
+count_targets = 0
+plane_pos = []
+matrix = []
+
+for i in range(n):
+    matrix.append(input().split())
+    for j in range(n):
+        if matrix[i][j] == 'p':
+            plane_pos = [i, j]
+        elif matrix[i][j] == 't':
+            targets_pos.append((i, j))
+            count_targets += 1
+
+m = int(input())
+commands = [input().split() for c in range(m)]
+kills = 0
+directions = {"up": (-1, 0), "down": (1, 0), "right": (0, 1), "left": (0, -1)}
+all_targets_killed = False
+
+for args in commands:
+    command = args[0]
+    direction = args[1]
+    steps = int(args[2])
+
+    row = plane_pos[0]
+    col = plane_pos[1]
+
+    if kills == count_targets:
+        all_targets_killed = True
+        break
+
+    if command == 'shoot':
+        current_target_pos = get_current_pos(direction, row, col, steps)
+
+        if is_valid(current_target_pos[0], n) and is_valid(current_target_pos[1], n):
+            if matrix[current_target_pos[0]][current_target_pos[1]] == 't':
+                kills += 1
+
+            matrix[current_target_pos[0]][current_target_pos[1]] = 'x'
+
+    elif command == 'move':
+        next_move_pos = get_current_pos(direction, row, col, steps)
+        next_row = next_move_pos[0]
+        next_col = next_move_pos[1]
+        if is_valid(next_row, n) and is_valid(next_col, n) and matrix[next_row][next_col] == '.':
+            matrix[next_row][next_col] = 'p'
+            matrix[row][col] = '.'
+            plane_pos = [next_row, next_col]
+
+if all_targets_killed:
+    print(f"Mission accomplished! All {kills} targets destroyed.")
+
+elif kills == count_targets:
+    print(f"Mission accomplished! All {kills} targets destroyed.")
+else:
+    print(f"Mission failed! {count_targets - kills} targets left.")
+
+[print(' '.join(line)) for line in matrix]
