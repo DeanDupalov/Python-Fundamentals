@@ -1,0 +1,53 @@
+from math import floor
+PLAYER_SYMBOL = 'P'
+WALLS_SYMBOL = 'X'
+size = int(input())
+
+
+def is_valid(value, max_value):
+    return 0 <= value < max_value
+
+
+
+def read_field(size_multi_list):
+    result = [input().split() for _ in range(size_multi_list)]
+    return result
+
+
+def find_player_pos(matrix, size_multi_list, PLAYER_SYMBOL):
+    for r in range(size_multi_list):
+        for c in range(size_multi_list):
+            if matrix[r][c] == PLAYER_SYMBOL:
+                return (r, c)
+
+hit_a_wall = False
+directions = {"up": (-1, 0), "down": (1, 0), "right": (0, 1), "left": (0, -1)}
+total_coins = 0
+my_path = []
+field = read_field(size)
+p_row_count, p_col_count = find_player_pos(field, size, PLAYER_SYMBOL)
+
+while total_coins < 100:
+    command = input()
+    if not command:
+        break
+    if command not in directions:
+        continue
+
+    next_row = p_row_count + directions[command][0]
+    next_col = p_col_count + directions[command][1]
+    if is_valid(next_row, size) and is_valid(next_col, size) and field[next_row][next_col] != WALLS_SYMBOL:
+        total_coins += int(field[next_row][next_col])
+        my_path.append([next_row, next_col])
+        if total_coins >= 100:
+            print(f"You won! You've collected {total_coins} coins.")
+        field[next_row][next_col] = PLAYER_SYMBOL
+        p_row_count, p_col_count = next_row, next_col
+    else:
+        final_coins = floor(total_coins / 2)
+        print(f"Game over! You've collected {final_coins} coins.")
+        break
+
+
+print(f"Your path: ")
+[print(el) for el in my_path]
