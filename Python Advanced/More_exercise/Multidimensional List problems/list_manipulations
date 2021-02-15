@@ -1,0 +1,37 @@
+def list_manipulator(list_nums, *args):
+    command = args[0]
+    location = args[1]
+    if command == 'add':
+        if location == "beginning":
+            new_list = list(args[2:])
+            result = new_list + list_nums
+            return result
+        elif location == "end":
+            result = list_nums + list(args[2:])
+            return result
+    elif command == 'remove':
+        if location == "beginning":
+            if len(args) == 3:
+                remove_count = args[2]
+                return list_nums[remove_count:]
+            return list_nums[1:]
+        elif location == "end":
+            if len(args) == 3:
+                remove_count = args[2]
+                for _ in range(remove_count):
+                    list_nums.pop()
+                return list_nums
+            return list_nums[:-1]
+
+
+print(list_manipulator([1,2,3], "remove", "end"))
+print(list_manipulator([1,2,3], "remove", "beginning"))
+print(list_manipulator([1,2,3], "add", "beginning", 20))
+print(list_manipulator([1,2,3], "add", "end", 30))
+print(list_manipulator([1,2,3], "remove", "end", 2))
+print(list_manipulator([1,2,3], "remove", "beginning", 2))
+print(list_manipulator([1,2,3], "add", "beginning", 20, 30, 40))
+print(list_manipulator([1,2,3], "add", "end", 30, 40, 50))
+
+
+
