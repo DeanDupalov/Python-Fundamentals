@@ -1,0 +1,14 @@
+def fix_calendar(list_nums):
+    for i in range(len(list_nums) - 1, 0, -1):
+        for j in range(i):
+            if list_nums[j] > list_nums[j + 1]:
+                temp = list_nums[j]
+                list_nums[j] = list_nums[j + 1]
+                list_nums[j + 1] = temp
+
+    return list_nums
+
+
+numbers = [3, 2, 1, 2 , 3, 7, 9]
+fixed = fix_calendar(numbers)
+print(fixed)
