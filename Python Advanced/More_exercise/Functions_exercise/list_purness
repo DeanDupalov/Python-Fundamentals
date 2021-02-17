@@ -1,0 +1,31 @@
+def best_list_pureness(list_nums, k_num):
+    def get_pureness(list_nums):
+        sum_result = 0
+        for i, num in enumerate(list_nums):
+            sum_result += num * i
+        return sum_result
+
+    pureness = 0
+    index = 0
+    for idx in range(k_num + 1):
+        current_pureness = get_pureness(list_nums)
+        if current_pureness > pureness:
+            pureness = current_pureness
+            index = idx
+        num = list_nums.pop()
+        list_nums.insert(0, num)
+
+    return f"Best pureness {pureness} after {index} rotations"
+
+
+test = ([4, 3, 2, 6], 4)
+result = best_list_pureness(*test)
+print(result)
+
+test = ([7, 9, 2, 5, 3, 4], 3)
+result = best_list_pureness(*test)
+print(result)
+
+test = ([1, 2, 3, 4, 5], 10)
+result = best_list_pureness(*test)
+print(result)
