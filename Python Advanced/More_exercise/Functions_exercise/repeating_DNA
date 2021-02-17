@@ -1,0 +1,18 @@
+def get_repeating_DNA(t):
+    repeating_substrings = list()
+    sub_strings = list()
+    for i in range(len(t) - 9):
+        sub_string = t[i: i + 10]
+        if sub_string:
+            if sub_string not in sub_strings:
+                sub_strings.append(sub_string)
+            else:
+                if sub_string not in repeating_substrings:
+                    repeating_substrings.append(sub_string)
+    return repeating_substrings
+
+
+test = "AAAAAACCCCAAAAAACCCCTTCAAAATCTTTCAAAATCT"
+
+result = get_repeating_DNA(test)
+print(result)
