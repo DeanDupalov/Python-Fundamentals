@@ -1,0 +1,40 @@
+def add_boxes(list_boxes, args):
+    for box in args:
+        list_boxes.append(box)
+
+    return list_boxes
+
+
+def sell_given_boxes(list_boxes, args):
+    for type_box in args:
+        while type_box in list_boxes:
+            list_boxes.remove(type_box)
+    return list_boxes
+
+
+def stock_availability(list_boxes, give_command, *args):
+    if give_command == 'delivery':
+        return add_boxes(list_boxes, args)
+
+    elif give_command == 'sell':
+        if args:
+            first_el = args[0]
+            if isinstance(first_el, int):
+                count_boxes = int(first_el)
+                return list_boxes[count_boxes:]
+            elif isinstance(first_el, str):
+                return sell_given_boxes(list_boxes, args)
+
+        else:
+            del list_boxes[0]
+            return list_boxes
+
+
+print(stock_availability(["choco", "vanilla", "banana"], "delivery", "caramel", "berry"))
+print(stock_availability(["chocolate", "vanilla", "banana"], "delivery", "cookie","banana"))
+print(stock_availability(["chocolate", "vanilla", "banana"], "sell"))
+print(stock_availability(["chocolate", "vanilla", "banana"], "sell", 3))
+print(stock_availability(["chocolate", "chocolate", "banana"], "sell", "chocolate"))
+print(stock_availability(["cookie", "chocolate", "banana"], "sell", "chocolate"))
+print(stock_availability(["chocolate", "vanilla", "banana"], "sell", "cookie"))
+
