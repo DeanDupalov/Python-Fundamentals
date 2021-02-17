@@ -1,0 +1,40 @@
+def get_duplicates(nums_list):
+    duplicates = set()
+    for n in nums_list:
+        occur = nums_list.count(n)
+        if occur > 1:
+            duplicates.add(n)
+    return sorted(list(duplicates))
+
+
+def get_missing_number(args):
+    nums = list(set(args))
+    smallest = nums[0]
+    biggest = nums[0]
+    missing = 0
+    for n in nums:
+        if n < smallest:
+            smallest = n
+        if n > biggest:
+            biggest = n
+
+    for i in range(smallest, biggest + 1):
+        if i not in nums:
+            missing = i
+
+    return missing
+
+
+def numbers_searching(*args):
+    result = []
+
+    duplicates = get_duplicates(args)
+    missing_num = get_missing_number(args)
+    result.append(missing_num)
+    result.append(duplicates)
+    return result
+
+
+print(numbers_searching(1, 2, 4, 2, 5, 4))
+print(numbers_searching(5, 5, 9, 10, 7, 8, 7, 9))
+print(numbers_searching(50, 50, 47, 47, 48, 45, 49, 44, 47, 45, 44, 44, 48, 44, 48))
